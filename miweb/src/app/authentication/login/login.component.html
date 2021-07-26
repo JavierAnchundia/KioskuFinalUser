@@ -1,0 +1,35 @@
+
+<div class="d-flex justify-content-between">
+  <h2 class="text-center" mat-dialog-title>Inicia sesión</h2>
+  <button type="button" class="btn-close" (click)="closeDialog()"></button>
+</div>
+<form  [formGroup]="loginForm!" (ngSubmit)="submitForm(loginForm.value)">
+  <div mat-dialog-content  class="form-body">
+    <mat-form-field class="justifier">
+      <input formControlName="email" matInput autofocus placeholder="Correo electrónico" text="email"
+        class="form-input">
+      <mat-error *ngIf="loginForm.controls['email'].hasError('email')">
+        Ingrese una dirección de correo válida.
+      </mat-error>
+      <mat-error *ngIf="loginForm.controls['email'].hasError('required')">
+        Este campo es obligatorio.
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field class="justifier">
+      <input formControlName="password" matInput placeholder="Contraseña" type="password" class="form-input">
+      <mat-error *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].hasError('required')">
+        Este campo es obligatorio.
+      </mat-error>
+    </mat-form-field>
+  </div>
+  <div class="form-footer">
+    <button mat-raised-button class="btn custom-btn" type="submit">
+      <mat-icon>input</mat-icon> Ingresar
+    </button>
+  </div>
+</form>
+
+<div class="additional-link">
+  <a (click)="openSignUpModal()">¿No tienes cuenta? <strong> <a routerLink="/inicio/auth/signup">Crear
+        cuenta</a></strong></a>
+</div>

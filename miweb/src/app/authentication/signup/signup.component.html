@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-between">
+  <h2 class="text-center" mat-dialog-title>Crea tu cuenta</h2>
+  <button type="button" class="btn-close" (click)="closeDialog()"></button>
+</div>
+    <form [formGroup]="signUpForm!" (ngSubmit)="submitForm(signUpForm.value)">
+      <div mat-dialog-content class="form-body">
+        <mat-form-field class="justifier">
+          <input matInput formControlName="name" placeholder="Nombre" text="text" class="form-input">
+          <mat-error *ngIf="signUpForm.controls['name'].hasError('required')">
+            Este campo es obligatorio.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="justifier">
+          <input formControlName="email" matInput placeholder="Correo electrónico" text="email" class="form-input">
+          <mat-error *ngIf="signUpForm.controls['email'].hasError('email')">
+            Ingrese una dirección de correo válida.
+          </mat-error>
+          <mat-error *ngIf="signUpForm.controls['email'].hasError('required')">
+            Este campo es obligatorio.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="justifier">
+          <input formControlName="password" matInput placeholder="Contraseña" type="password" class="form-input">
+          <mat-error
+            *ngIf="signUpForm.controls['password'].touched && signUpForm.controls['password'].hasError('required')">
+            Este campo es obligatorio.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="justifier">
+          <input formControlName="address" matInput placeholder="Dirección" type="text" class="form-input">
+        </mat-form-field>
+      </div>
+    <div class="form-footer">
+      <button mat-raised-button class="btn custom-btn" type="submit">
+        <mat-icon>add</mat-icon> Registrar
+      </button>
+    </div>
+  </form>
