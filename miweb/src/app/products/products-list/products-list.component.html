@@ -1,0 +1,137 @@
+  <!-- ========================= SECTION PAGETOP ========================= -->
+  <section class="section-pagetop">
+    <div class="container">
+      <h2 class="title-page">Productos</h2>
+    </div> <!-- container //  -->
+  </section>
+  <!-- ========================= SECTION INTRO END// ========================= -->
+
+  <!-- ========================= SECTION CONTENT ========================= -->
+  <section class="section-content padding-y">
+    <div class="container">
+
+      <div class="row">
+        <aside class="col-md-3">
+
+          <div class="card">
+            <article class="filter-group">
+              <header class="card-header">
+                <a data-bs-toggle="collapse" data-bs-target="#collapse_1" aria-expanded="true"
+                  aria-controls="collapseOne">
+                  <i class="icon-control fa fa-chevron-down"></i>
+                  <h6 class="title">Categorías</h6>
+                </a>
+              </header>
+              <div class="filter-content accordion-collapse collapse show" id="collapse_1">
+                <div class="card-body">
+                  <form class="pb-3">
+                    <div class="input-group">
+                      <nz-select nzSize="large" [ngModelOptions]="{standalone: true}" (ngModelChange)="onChangeCategory($event)"
+                        nzMode="tags" [nzMaxMultipleCount]=1 nzPlaceHolder="Buscar" [(ngModel)]="inputValue">
+                        <nz-option *ngFor="let option of this.filteredOptions" [nzLabel]="option.nombre"
+                          [nzValue]="option"></nz-option>
+                      </nz-select>
+                    </div>
+                  </form>
+
+                  <ul class="list-menu">
+                    <!-- <li *ngFor="let cat of this.categoriesList">
+                      <a (click)="loadSubcategories(cat.id)"> {{ cat.nombre }}</a>
+                    </li> -->
+                  </ul>
+                </div>
+              </div>
+            </article> <!-- filter-group  .// -->
+            <article class="filter-group">
+              <header class="card-header">
+                <a data-bs-toggle="collapse" data-bs-target="#collapse_2" aria-expanded="true">
+                  <i class="icon-control fa fa-chevron-down"></i>
+                  <h6 class="title">Subcategorías </h6>
+                </a>
+              </header>
+              <div class="filter-content collapse show" id="collapse_2">
+                <div class="card-body">
+                  <label *ngIf="this.subCatList.length === 0">No hay subcategorías para mostrar.</label>
+                  <nz-tag  *ngFor="let tag of this.subCatList" nzMode="checkable" [nzChecked]="selectedTags.indexOf(tag) > -1"
+                    (nzCheckedChange)="handleChange($event, tag)">
+                    <a>{{ tag.nombre }}</a>
+                  </nz-tag>
+                  <br>
+                </div> <!-- card-body.// -->
+              </div>
+            </article> <!-- filter-group .// -->
+            <article class="filter-group">
+              <header class="card-header">
+                <a data-bs-toggle="collapse" data-bs-target="#collapse_3" aria-expanded="true" class="">
+                  <i class="icon-control fa fa-chevron-down"></i>
+                  <h6 class="title">Nombre</h6>
+                </a>
+              </header>
+              <div class="filter-content collapse show" id="collapse_3">
+                <div class="card-body">
+                  <div class="form-row">
+                    <div class="example-input">
+                      <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
+                        <input
+                          placeholder="input here"
+                          nz-input
+                          [(ngModel)]="nameValue"
+                          (ngModelChange)="onChange($event)"
+                        />
+                      </nz-input-group>
+                      <ng-template #suffixIcon>
+                        <i nz-icon nzType="search"></i>
+                      </ng-template>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+        </aside>
+        <main class="col-md-9">
+          <div class="d-flex justify-content-center">
+            <nz-spin *ngIf="loading" nzSimple nzTip="Cargando..." [nzSize]="'large'"></nz-spin>
+          </div>
+          <header>
+            <h3>{{ this.currentCat.nombre}}</h3>
+          </header>
+          <div class="row" *ngIf="!loading">
+            <p *ngIf="this.productsList.length === 0">No se encontraron artículos para el criterio seleccionado.</p>
+            <div class="col-md-4" *ngFor="let product of this.productsList">
+              <figure class="card card-product-grid">
+                <div class="img-wrap">
+                  <img src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png">
+                </div> <!-- img-wrap.// -->
+                <figcaption class="info-wrap">
+                  <div class="fix-height">
+                    <a class="title" (click)="openProductDetail(product.id)">{{ product.titulo }}</a>
+                    <div class="price-wrap mt-2">
+                      <span class="price">{{ product.precio }} </span>
+                    </div> <!-- price-wrap.// -->
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-addCart" type="button">Agregar al carro</button>
+                  </div>
+                </figcaption>
+              </figure>
+            </div> <!-- col.// -->
+          </div> <!-- row end.// -->
+
+
+          <nav class="mt-4" aria-label="Page navigation sample">
+            <ul class="pagination">
+              <li class="page-item disabled"><a class="page-link">Ant.</a></li>
+              <li class="page-item active"><a class="page-link">1</a></li>
+              <li class="page-item"><a class="page-link">Sig.</a></li>
+            </ul>
+          </nav>
+
+        </main> <!-- col.// -->
+
+      </div>
+
+    </div> <!-- container .//  -->
+  </section>
+  <!-- ========================= SECTION CONTENT END// ========================= -->
