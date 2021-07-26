@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg  navbar-light" style="background-color: #f8e6d1c9;">
+  <div class="container-fluid">
+    <button class="navbar-toggler flex-grow-sm-1 flex-grow-0 me-2" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbar5">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" routerLink="/">
+      App Name
+    </a>
+    <div class="collapse navbar-collapse"></div>
+
+    <div class="navbar-collapse collapse" id="navbar5">
+      <ul class=" nav navbar-nav mr-auto">
+        <li class="nav-item" router-link="/">
+          <a class="nav-link">
+            Inicio
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link">
+            Membresías
+          </a>
+        </li>
+        <li class="nav-item" routerLink="productos/lista">
+          <a class="nav-link">
+            Catálogo
+          </a>
+        </li>
+      </ul>
+      <div class="main-header-login d-none d-sm-block">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item" *ngIf="!authenticated">
+            <button class="btn btn-sm btn-login" type="button" (click)="openLoginModal()">
+              Regístrate o Inicia sesión</button>
+          </li>
+          <li class="nav-item m-2"  *ngIf="authenticated">
+              <nz-badge [nzCount]="0" nzShowZero [nzStyle]="{ backgroundColor: '#fff', color: '#999', boxShadow: '0 0 0 1px #d9d9d9 inset' }">
+                <i nz-icon nzType="shopping-cart" ></i>
+              </nz-badge>
+          </li>
+          <li class="nav-item m-2"  *ngIf="authenticated" nz-dropdown [nzDropdownMenu]="menu">
+            <nz-avatar nzText="C" style="color:#faf7f5; background-color:#809b97;"></nz-avatar>
+            <i nz-icon nzType="down"></i>
+          </li>
+          <nz-dropdown-menu #menu="nzDropdownMenu" nzPlacement="bottomCenter">
+            <ul nz-menu nzSelectable>
+              <li nz-menu-item>Ver perfil</li>
+              <li nz-menu-item routerLink="postular/items">Ver ítems postulados</li>
+              <li nz-menu-item nzDanger (click)="confirmLogout()">Cerrar sesión</li>
+            </ul>
+          </nz-dropdown-menu>
+          <li class="nav-item ml-10">
+            <button class="btn btn-sm btn-submit" type="button" routerLink="postular/nuevo">
+              <mat-icon>add_circle_outline</mat-icon>Postular ítem
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
