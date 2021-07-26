@@ -1,0 +1,17 @@
+.btn-submit {
+  font-size: 0.875rem;
+  border-radius: 20px;
+  float: right;
+  margin-top: 2px;
+  padding:0 20px;
+  height: 40px;
+  background-color: #c09456;
+  border: 1px solid #c09456;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn-create:hover{
+  background-color: #85663b;
+  cursor: pointer;
+}
