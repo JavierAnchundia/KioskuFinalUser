@@ -158,60 +158,7 @@ a:hover {
   }
 
 
-  .bg-white {
-    background-color: #fff;
-  }
-
-  .bg-orange {
-    background-color: #ff9017;
-  }
-
-  .bg-green {
-    background-color: #00b517;
-  }
-
-  .bg-blue {
-    background-color: #3167eb;
-  }
-
-  .bg-red {
-    background-color: #fa3434;
-  }
-
-  .bg-gradient-blue {
-    background: rgba(33, 37, 41, 0.4);
-    /* For browsers that do not support gradients */
-    /* For Safari 5.1 to 6.0 */
-    /* For Opera 11.1 to 12.0 */
-    /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, rgba(49, 103, 235, 0.9), rgba(33, 37, 41, 0.4));
-    /* Standard syntax */
-    transition: 0.5s;
-  }
-
-  .bg-gradient-green {
-    background: rgba(33, 37, 41, 0.4);
-    /* For browsers that do not support gradients */
-    /* For Safari 5.1 to 6.0 */
-    /* For Opera 11.1 to 12.0 */
-    /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, rgba(0, 181, 23, 0.9), rgba(33, 37, 41, 0.4));
-    /* Standard syntax */
-    transition: 0.5s;
-  }
-
-  .bg-gradient-orange {
-    background: rgba(33, 37, 41, 0.4);
-    /* For browsers that do not support gradients */
-    /* For Safari 5.1 to 6.0 */
-    /* For Opera 11.1 to 12.0 */
-    /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to bottom right, rgba(255, 144, 23, 0.9), rgba(33, 37, 41, 0.4));
-    /* Standard syntax */
-    transition: 0.5s;
-  }
-
-
+  
   /* --------------------- titles ---------------------- */
   .section-heading {
     margin-bottom: 5px;
@@ -230,8 +177,17 @@ a:hover {
   }
 
   .title-page {
-    color: #212529;
+    color: #732C7B;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 10px;
   }
+
+  h3{
+    color: #29159b;
+    padding: 15px 0;
+  }
+
 
   .text-lg {
     font-size: 1.3rem;
@@ -394,21 +350,7 @@ dl[class=row] {
     padding-left: 24px;
     margin-bottom: 7px;
   }
-  .list-check > li::before {
-    font-family: "Font Awesome 5 Free";
-    font-weight: 900;
-    font-size: 12px;
-    color: #00b517;
-    position: absolute;
-    top: 2px;
-    left: 0;
-    content: "";
-  }
 
-  .list-normal {
-    list-style: none;
-    padding-left: 0;
-  }
   .list-normal li {
     padding-left: 1em;
     margin-bottom: 7px;
@@ -456,16 +398,17 @@ dl[class=row] {
     color: initial;
   }
   a[class*=card]:hover .title {
-    color: #3167eb;
+    color: #33626C;
+    text-decoration: none;
   }
 
   /* BASE STYLE FOR PRODUCT ITEM */
   [class*=card-product] a.title {
-    color: #212529;
+    color: #3721b3;
     display: block;
   }
   [class*=card-product] a.title:hover {
-    color: #3167eb;
+    color: #5234e6;
   }
   [class*=card-product] .badge {
     top: 10px;
@@ -483,6 +426,7 @@ dl[class=row] {
     height: 100%;
     max-width: 100%;
     width: auto;
+    padding: 5px;
     display: inline-block;
     -o-object-fit: cover;
        object-fit: cover;
@@ -677,49 +621,34 @@ dl[class=row] {
     max-height: 65px;
   }
 
-  .notify {
-    position: absolute;
-    top: -4px;
-    right: -10px;
-    display: inline-block;
-    padding: 0.25em 0.6em;
-    font-size: 12px;
-    line-height: 1;
-    text-align: center;
-    border-radius: 3rem;
-    color: #fff;
-    background-color: #fa3434;
-  }
 
   .price {
-    font-weight: 600;
-    color: #212529;
+    font-weight: 800;
+    color: #4f4f52;
   }
 
-  .price-old {
-    color: #969696;
-    margin-left: 3px;
-    font-size: 85%;
-  }
+
 
   .icon-control {
     margin-top: 5px;
     float: right;
     font-size: 80%;
+    color:#ebc12c;
   }
 
   .card-header .title {
     margin-bottom: 0;
-    line-height: 1.5;
-    color: #1d8c7a;
+    line-height: 1.8;
+    color: #29159b;
+    font-weight: 600;
   }
 
-  .filter-group {
-    border-bottom: 1px solid #e4e4e4;
-  }
+
   .filter-group .card-header {
     border-bottom: 0;
+    background-color: #fff;
   }
+
   .filter-group:last-child {
     border-bottom: 0;
   }
@@ -735,60 +664,8 @@ dl[class=row] {
     max-width: 100%;
   }
 
-  /* ================= TRACKING ============== */
-.tracking-wrap {
-    position: relative;
-    background-color: #ddd;
-    height: 7px;
-    display: flex;
-    margin-bottom: 60px;
-    margin-top: 50px;
-  }
-  .tracking-wrap .step {
-    flex-grow: 1;
-    width: 25%;
-    margin-top: -18px;
-    text-align: center;
-    position: relative;
-  }
-  .tracking-wrap .step::before {
-    height: 7px;
-    position: absolute;
-    content: "";
-    width: 100%;
-    left: 0;
-    top: 18px;
-  }
-  .tracking-wrap .icon {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    position: relative;
-    border-radius: 100%;
-    background: #ddd;
-  }
-  .tracking-wrap .text {
-    display: block;
-    margin-top: 7px;
-  }
-  .tracking-wrap .step.active .icon {
-    background: #3167eb;
-    color: #fff;
-  }
-  .tracking-wrap .step.active .text {
-    font-weight: 400;
-    color: #000;
-  }
-  .tracking-wrap .step.active:before {
-    background: #3167eb;
-  }
 
-  .menu-category {
-    margin: 0;
-    padding: 0;
-  }
-  .menu-category li {
+ .menu-category li {
     position: relative;
     display: block;
     border-bottom: 1px solid #e4e4e4;
@@ -944,19 +821,7 @@ dl[class=row] {
     display: inline-block;
     cursor: zoom-in;
   }
-  .gallery-wrap .thumbs-wrap {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .gallery-wrap .thumbs-wrap .item-thumb {
-    width: 60px;
-    height: 60px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    margin: 3px;
-    display: inline-block;
-    overflow: hidden;
-  }
+
   .gallery-wrap .thumbs-wrap img {
     max-width: 100%;
     max-height: 100%;
@@ -971,11 +836,7 @@ dl[class=row] {
     cursor: zoom-in;
   }
 
-  .item-option-select {
-    margin-bottom: 1rem;
-    display: inline-block;
-    margin-right: 15px;
-  }
+
   .item-option-select .btn {
     min-width: 80px;
   }
@@ -1044,12 +905,12 @@ dl[class=row] {
   }
 
   .btn-addCart{
-    background-color: #1d8c7a;
-    color: white;
+    background-color: #fcd857;
+    color: rgb(5, 5, 5);
   }
 
   .btn-addCart:hover{
-    background-color: #225e54;
+    background-color: #fcd23df5;
   }
 
   .btn-search{
@@ -1070,4 +931,20 @@ dl[class=row] {
   nz-spin {
     display: inline-block;
     margin-right: 16px;
+  }
+
+  i{
+    cursor: pointer;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  .btn{
+    border-radius: 0;
+  }
+
+  div.price-wrap  {
+    text-align: right;
   }

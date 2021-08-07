@@ -1,7 +1,7 @@
   <!-- ========================= SECTION PAGETOP ========================= -->
   <section class="section-pagetop">
-    <div class="container">
-      <h2 class="title-page">Productos</h2>
+    <div class="container pt-3">
+      <h1 class="title-page display-5">Catálogo</h1>
     </div> <!-- container //  -->
   </section>
   <!-- ========================= SECTION INTRO END// ========================= -->
@@ -62,7 +62,7 @@
             </article> <!-- filter-group .// -->
             <article class="filter-group">
               <header class="card-header">
-                <a data-bs-toggle="collapse" data-bs-target="#collapse_3" aria-expanded="true" class="">
+                <a data-bs-toggle="collapse" data-bs-target="#collapse_3" aria-expanded="true" >
                   <i class="icon-control fa fa-chevron-down"></i>
                   <h6 class="title">Nombre</h6>
                 </a>
@@ -73,14 +73,17 @@
                     <div class="example-input">
                       <nz-input-group nzSize="large" [nzSuffix]="suffixIcon">
                         <input
-                          placeholder="input here"
+                          placeholder="Buscar producto"
                           nz-input
                           [(ngModel)]="nameValue"
                           (ngModelChange)="onChange($event)"
+                          [nzAutocomplete]="auto"
                         />
+                        <nz-autocomplete [nzDataSource]="filteredName" #auto></nz-autocomplete>
+
                       </nz-input-group>
-                      <ng-template #suffixIcon>
-                        <i nz-icon nzType="search"></i>
+                      <ng-template #suffixIcon >
+                        <i nz-icon nzType="search" (click)="filterProductsByName(this.filteredName[0])"></i>
                       </ng-template>
                       </div>
                   </div>
@@ -99,20 +102,21 @@
           </header>
           <div class="row" *ngIf="!loading">
             <p *ngIf="this.productsList.length === 0">No se encontraron artículos para el criterio seleccionado.</p>
-            <div class="col-md-4" *ngFor="let product of this.productsList">
+            <div class="col-md-4" *ngFor="let product of this.filteredProducts">
               <figure class="card card-product-grid">
                 <div class="img-wrap">
-                  <img src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png">
+                  <!-- <img src="https://socialistmodernism.com/wp-content/uploads/2017/07/placeholder-image.png"> -->
+                  <img [src]="product.thumbnail">
                 </div> <!-- img-wrap.// -->
                 <figcaption class="info-wrap">
                   <div class="fix-height">
                     <a class="title" (click)="openProductDetail(product.id)">{{ product.titulo }}</a>
-                    <div class="price-wrap mt-2">
-                      <span class="price">{{ product.precio }} </span>
+                    <div class="price-wrap mt-2 text-left">
+                      <span class="price">{{ product.precio }} C</span>
                     </div> <!-- price-wrap.// -->
                   </div>
                   <div class="d-grid gap-2">
-                    <button class="btn btn-addCart" type="button">Agregar al carro</button>
+                    <button class="btn btn-addCart" type="button" (click)="addToCart(product)">Agregar al carro</button>
                   </div>
                 </figcaption>
               </figure>

@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import { CarroComprasService } from 'src/app/services/carro-compras/carro-compras.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria/subcategoria.service';
+import { Producto } from '../../models/producto';
 
 @Component({
   selector: 'app-products-list',
@@ -18,21 +20,26 @@ export class ProductsListComponent implements OnInit {
   public filteredOptions: any[] = [];
   public loading = true;
   public params: any;
-  public currentCat: any = '';
+  public currentCat: any = {nombre: 'Más recientes', id:''};
   public currentSubCat: any = '';
-  selectedTags: string[] = [];
+  public selectedTags: string[] = [];
   public nameValue?: string;
+  public filteredName: string[] = [];
+  private options : string[] = [];
+  public filteredProducts: any[] = [];
 
   constructor(
     private categorias: CategoriaService,
     private subcategoria: SubcategoriaService,
     private producto: ProductoService,
+    private carro: CarroComprasService,
     public route: ActivatedRoute,
     public router: Router,
   ) { }
 
   ngOnInit(): void {
     this.loadCategories();
+
     if (this.route.snapshot.queryParams.cat) { // * En caso de que el url tenga parametros
       this.getRouteParams();
     } else {
@@ -59,17 +66,34 @@ export class ProductsListComponent implements OnInit {
 
   loadMostRecent(): void{
     this.loading = true;
+    this.options = [];
     this.producto.retrieveMostRecent()
     .then(prod => {
-      console.log(prod);
-      this.productsList = prod[0];
+      prod[0].forEach((element: any) => {
+        this.productsList.push({
+          id: element.id,
+          titulo: element.titulo,
+          descripcion: element?.descripcion,
+          precio: element?.precio,
+          disponible: element?.disponible,
+          creditos: element?.item.creditos,
+          cantidad: element?.item.cantidad,
+          thumbnail: 'http://127.0.0.1:8000/static' + prod[1].filter((img: any) => img.producto === element?.id)[0].imagen
+        });
+
+        this.options.push(
+          element.titulo
+        )
+      })
+      this.filteredProducts = this.productsList;
+      this.filteredName = this.options;
+
       this.loading = false;
     })
     .catch((error: any) => console.log(error))
   }
 
   onChangeCategory(value: any): void {
-    console.log(value);
     this.filteredOptions = this.categoriesList.filter((option: any) =>
     option.nombre.toLowerCase().includes(value.toString().toLowerCase()) !== false);
     if (value[0] !== undefined){
@@ -86,7 +110,7 @@ export class ProductsListComponent implements OnInit {
     } else {
       this.productsList= [];
       this.subCatList = [];
-      this.currentCat = '';
+      this.currentCat = {nombre: 'Más recientes', id:''};
       this.router.navigate(['.'], {
         relativeTo: this.route, queryParams: {
           cat: this.currentCat.id,
@@ -97,20 +121,59 @@ export class ProductsListComponent implements OnInit {
   }
 
   loadProductsByCategory(id: string): void{
+    this.options = [];
+
     this.producto.retrieveProductsByCat(id)
     .then(prod => {
       console.log(prod);
-      this.productsList = prod[0];
+      prod[0].forEach((element: any) => {
+        this.productsList.push({
+          id: element.id,
+          titulo: element.titulo,
+          descripcion: element?.descripcion,
+          precio: element?.precio,
+          disponible: element?.disponible,
+          cantidad: element?.item.cantidad,
+          creditos: element?.item.creditos,
+          thumbnail: 'http://127.0.0.1:8000/static' + prod[1].filter((img: any) => img.producto === element?.id)[0].imagen
+        });
+        this.options.push(
+          element.titulo
+        )
+      })
+      this.filteredProducts = this.productsList;
+      this.filteredName = this.options;
+
       this.loading = false;
     })
     .catch((error: any) => console.log(error))
   }
 
   loadProductsBySubCategory(id: string): void{
+    this.options = [];
+
+    this.productsList= [];
     this.producto.retrieveProductsBySubcat(id)
     .then(prod => {
       console.log(prod);
-      this.productsList = prod[0];
+      prod[0].forEach((element: any) => {
+        this.productsList.push({
+          id: element.id,
+          titulo: element.titulo,
+          descripcion: element?.descripcion,
+          precio: element?.precio,
+          disponible: element?.disponible,
+          creditos: element?.item.creditos,
+          cantidad: element?.item.cantidad,
+          thumbnail: 'http://127.0.0.1:8000/static' + prod[1].filter((img: any) => img.producto === element?.id)[0].imagen
+        });
+        this.options.push(
+          element.titulo
+        )
+      })
+      this.filteredProducts = this.productsList;
+      this.filteredName = this.options;
+
       this.loading = false;
     })
     .catch((error: any) => console.log(error))
@@ -149,9 +212,21 @@ export class ProductsListComponent implements OnInit {
     this.loadProductsBySubCategory(tag.id);
   }
 
+
+
   onChange(value: string): void {
-    console.log(value);
+    this.filteredName = this.options.filter((option: any) =>
+    option.toLowerCase().includes(value?.toString().toLowerCase()) !== false);
   }
 
+  filterProductsByName(name?: string): void{
+   this.filteredProducts = this.productsList.filter((option: any) =>
+    option.titulo.toLowerCase().includes(name?.toString().toLowerCase()) !== false);
+
+  }
+
+  addToCart(product: Producto) {
+    this.carro.addToCart(product);
+  }
 
 }
