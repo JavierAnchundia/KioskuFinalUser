@@ -1,0 +1,26 @@
+<div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+  <h1 class="display-5 fw-normal">Membresías</h1>
+  <p class="fs-5 text-muted">Adquiere tu membresía y obten beneficios en tus compras.</p>
+</div>
+<main class="container">
+  <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div class="col" *ngFor="let mem of this.membershipList">
+      <div class="card mb-4 rounded-3" >
+        <div class="card-header py-3">
+          <h4 class="my-0 fw-normal">{{ mem.tipo}}</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">${{mem.tarifa}}<small class="text-muted fw-light">/mes</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>Descuento del {{ mem.pct_dscto}}% en tus compras</li>
+
+          </ul>
+          <button type="button" class="w-100 btn btn-lg btn-signup" *ngIf="mem.tarifa !== '0.00'">
+            <span>Suscribirse</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>

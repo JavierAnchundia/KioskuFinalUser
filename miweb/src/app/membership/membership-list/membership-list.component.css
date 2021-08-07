@@ -1,0 +1,26 @@
+.btn-signup{
+  background-color: #f8dc7b;
+  color: rgb(14, 13, 13);
+}
+
+.card-header{
+  background-color: #fff;
+  border-bottom: 0;
+}
+
+.btn{
+  border-radius: 0;
+}
+
+.card{
+  min-height: 200px;
+}
+
+
+.card:hover{
+  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.856);
+}
+
+h1{
+  color: #732C7B;
+}
