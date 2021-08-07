@@ -1,0 +1,65 @@
+.main-body {
+  padding: 15px;
+}
+
+.card-body {
+  flex: 1 1 auto;
+  min-height: 1px;
+  padding: 1rem;
+}
+
+.btn-upgrade{
+  background-color: #F8DC7B;
+  border-color: #F8DC7B;
+  color: #000;
+  padding: 5px 30px;
+  border-radius: 0;
+}
+
+.btn-upgrade:hover{
+  background-color: #dbc36bee;
+}
+
+.btn-edit{
+  color: black;
+  background-color: #F8DC7B;
+  border-color: #F8DC7B;
+  border-radius: 0;
+}
+
+.btn-edit:hover{
+  background-color: #dbc36bee;
+}
+
+
+.btn-save{
+  color: #000;
+  background-color: #F8DC7B;
+  border-color: #F8DC7B;
+  margin-right: 5px;
+  border-radius: 0;
+}
+
+.btn-save:hover{
+  background-color: #dbc36bee;
+}
+
+.btn-cancel{
+  color: #4e37d3;
+  background-color: #fff;
+  border-color: #4e37d3;
+  border-radius: 0;
+  margin-right: 5px;
+}
+
+.btn-cancel:hover{
+  color: #FFF;
+  background-color: #4e37d3;
+  border-color: #4e37d3;
+
+}
+
+
+h4{
+  color:#4e37d3;
+}

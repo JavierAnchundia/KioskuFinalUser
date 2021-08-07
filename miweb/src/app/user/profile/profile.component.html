@@ -1,0 +1,103 @@
+<div class="container">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="../../../assets/avatar-person.svg" alt="Admin" class="rounded-circle" width="120">
+              <div class="mt-3">
+                <h4>{{ this.currentUserInfo?.name.split(' ')[0] }}</h4>
+                <p class="text-secondary strong mb-1">{{ this.currentUserInfo?.saldo }} Créditos</p>
+                <p class="text-muted font-size-sm">Cuenta {{ this.currentUserInfo?.membresia.tipo }}</p>
+                <div class="d-grid gap-2">
+                  <button class="btn btn-upgrade" type="button" routerLink="/inicio/membresia">Mejorar cuenta</button>
+                  <button class="btn btn-cancel" type="button">Comprar saldo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body">
+            <form [formGroup]="this.signUpForm" (ngSubmit)="updateUserProfile(this.signUpForm.value)">
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Nombre completo</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <span *ngIf="!this.editEnabled">{{ this.currentUserInfo?.name }}</span>
+                  <div *ngIf="this.editEnabled" class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" formControlName="name">
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Email</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <span *ngIf="!this.editEnabled">{{ this.currentUserInfo?.email }}</span>
+                  <div *ngIf="this.editEnabled" class="input-group input-group-sm mb-3">
+                    <input type="email" class="form-control" formControlName="email">
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Provincia</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <span *ngIf="!this.editEnabled">{{ this.currentUserInfo?.provincia.nombre }}</span>
+                  <select *ngIf="this.editEnabled" class="form-select form-select-sm " formControlName="province" (change)="loadCities($event.target)"
+                    aria-label=".form-select-sm example">
+                    <option selected>Seleccione una opción</option>
+                    <option *ngFor="let prov of this.provinces" [value]="prov.id"
+                    [selected]="this.currentUserInfo.provincia.id == prov.id">{{ prov.nombre }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Ciudad</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <span *ngIf="!this.editEnabled">{{ this.currentUserInfo?.ciudad.nombre }}</span>
+                  <select *ngIf="this.editEnabled" class="form-select form-select-sm" formControlName="city"
+                    aria-label=".form-select-sm example">
+                    <option selected>Seleccione una opción</option>
+                    <option *ngFor="let city of this.cities" [value]="city.id"
+                    [selected]="this.currentUserInfo.ciudad.id == city.id">{{  city.nombre }}</option>
+                  </select>
+
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-sm-3">
+                  <h6 class="mb-0">Dirección</h6>
+                </div>
+                <div class="col-sm-9 text-secondary">
+                  <span *ngIf="!this.editEnabled">{{ this.currentUserInfo?.address }}</span>
+                  <div *ngIf="this.editEnabled" class="input-group input-group-sm mb-3">
+                    <input type="text" class="form-control" formControlName="address">
+                  </div>
+                </div>
+              </div>
+              <hr>
+              <div class="d-flex justify-content-end">
+                <a class="btn btn-edit" *ngIf="!this.editEnabled" (click)="enableEdit()">Editar perfil</a>
+                <button class="btn btn-save" *ngIf="this.editEnabled" type="submit">Guardar cambios</button>
+                <button class="btn btn-cancel" *ngIf="this.editEnabled" (click)="cancelEdit()">Cancelar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
