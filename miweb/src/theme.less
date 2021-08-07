@@ -1,9 +1,17 @@
+@import "../node_modules/ng-zorro-antd/ng-zorro-antd.aliyun.less";
 
-// Custom Theming for NG-ZORRO
-// For more information: https://ng.ant.design/docs/customize-theme/en
-@import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
+@primary-color: #6144ff;
+@info-color: #f8dc7b;
 
-// Override less variables to here
-// View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less
 
-// @primary-color: #1890ff;
+.ant-select-multiple .ant-select-selection-item-remove > .anticon{
+    vertical-align: 0;
+}
+
+.ant-upload-list-picture .ant-upload-list-item-error, .ant-upload-list-picture-card .ant-upload-list-item-error{
+    border-color: #6144ff;
+}
+
+.ant-upload-list-item-error, .ant-upload-list-item-error .ant-upload-text-icon > .anticon, .ant-upload-list-item-error .ant-upload-list-item-name{
+    color: #6144ff;
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { LoginComponent } from 'src/app/authentication/login/login.component';
+import { CarroComprasService } from 'src/app/services/carro-compras/carro-compras.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -11,15 +12,20 @@ import Swal from 'sweetalert2';
 })
 export class NavbarComponent implements OnInit {
   public authenticated = false;
+  public menuItems = [
+    {label: 'Inicio', router: '/', active: true},
+    {label: 'Membresías', router: 'membresia/', active: false},
+    {label: 'Catálogo', router: 'productos/lista', active: false},
+  ]
 
   constructor(
     private usuario: UsuarioService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public carro: CarroComprasService,
   ) { }
 
   ngOnInit(): void {
     this.authenticated = this.usuario.getUserStatus();
-    console.log(this.authenticated);
   }
 
   openLoginModal(): void {
@@ -51,5 +57,10 @@ export class NavbarComponent implements OnInit {
         this.authenticated = this.usuario.getUserStatus();
       }
     })
+  }
+
+  updateActiveItem(item: any): void{
+    this.menuItems.forEach((item) => item.active = false);
+    item.active = true;
   }
 }

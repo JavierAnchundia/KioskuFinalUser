@@ -14,14 +14,14 @@
   padding: 0 20px;
   height: 35px;
   background-color: #fff;
-  border: 1px solid #c09456;
-  color: #c09456;
+  border: 1px solid #6144FF;
+  color: #6144FF;
   cursor: pointer;
 }
 
 .btn-login:hover {
-  background-color: #c09456;
-  border: 1px solid #c09456;
+  background-color: #6144FF;
+  border: 1px solid #6144FF;
   color: #fff;
   cursor: pointer;
 }
@@ -36,14 +36,14 @@
   margin-left: 1px;
   padding: 0 20px;
   height: 35px;
-  background-color: #c09456;
-  border: 1px solid #c09456;
+  background-color: #6144FF;
+  border: 1px solid #6144FF;
   color: #fff;
   cursor: pointer;
 }
 
 .btn-submit:hover {
-  background-color: #85663b;
+  background-color: #4b34ce;
   cursor: pointer;
 }
 
@@ -69,4 +69,33 @@ mat-icon {
 nz-badge {
   margin-right: 5px;
   margin-top: 2px;
+}
+
+.navbar-brand{
+  color: #fff;
+  font-weight: bold;
+}
+
+.nav-link{
+  color: #fff;
+}
+
+.offcanvas-start{
+  width: 80%;
+  background-color: #b8b4e6f3;
+}
+
+.navbar-dark .navbar-nav .nav-link{
+  color: #fff;
+}
+
+.navbar-dark .navbar-nav .nav-link.active{
+  color: #732C7B;
+  font-weight: 400;
+}
+
+.btn.btn-link{
+  padding:0;
+  text-decoration:none;
+  color: #fff;
 }

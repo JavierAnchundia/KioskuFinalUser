@@ -22,6 +22,11 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProductsComponent } from './products/products.component';
+import { CartComponent } from './cart/cart.component';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { MembershipComponent } from './membership/membership.component';
+import { UserComponent } from './user/user.component';
+import { MatSelectModule } from '@angular/material/select';
 
 
 registerLocaleData(es);
@@ -33,7 +38,10 @@ registerLocaleData(es);
     AuthenticationComponent,
     NavbarComponent,
     SubmissionComponent,
-    ProductsComponent
+    ProductsComponent,
+    CartComponent,
+    MembershipComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,10 @@ registerLocaleData(es);
     NzIconModule,
     NzAvatarModule,
     NzDropDownModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    NzMessageModule,
+    MatSelectModule,
+
   ],
   exports: [
     NavbarComponent
