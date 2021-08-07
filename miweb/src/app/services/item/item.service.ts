@@ -16,8 +16,8 @@ export class ItemService {
     return this.http.post<any>(url, item).toPromise();
   }
 
-  retrieveItemsByUser(id: string): Promise<any>{
-    const url = AUTH_SERVICIOS.itemsByUser + id + '/';
+  retrieveItemsByUser(id: string, pageNo: string, pageSize: string): Promise<any>{
+    const url = AUTH_SERVICIOS.itemsByUser + id + '/' + '?page=' + pageNo + '&size=' + pageSize;
 
     return this.http.get(url).toPromise();
   }
@@ -34,4 +34,15 @@ export class ItemService {
     return this.http.put(url, item).toPromise();
   }
 
+  updateState(id: string, newState: any): Promise<any>{
+    const url = AUTH_SERVICIOS.estado + id + '/';
+
+    return this.http.put<any>(url, newState).toPromise();
+  }
+
+  updateCredits(id: string, creditos: any): Promise<any>{
+    const url = AUTH_SERVICIOS.update_credits + id + '/';
+
+    return this.http.patch(url, creditos).toPromise();
+  }
 }

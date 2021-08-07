@@ -1,19 +1,20 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import AUTH_SERVICIOS from 'src/app/config/urls';
-import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ImagenProductoService {
+export class MembershipService {
 
   constructor(
     private http: HttpClient,
   ) { }
 
-  retrieveImagesByProduct(id: string): Promise<any>{
-    const url = AUTH_SERVICIOS.img_producto + id +'/';
+  retrieveMemberships(): Promise<any> {
+    const url = AUTH_SERVICIOS.membresia;
 
     return this.http.get(url).toPromise();
   }
+  
 }

@@ -29,5 +29,17 @@ export class ProductoService {
     return this.http.get(url).toPromise();
   }
 
+  retrieveProductById(id: string): Promise<any>{
+    const url = AUTH_SERVICIOS.producto + id + '/';
+
+    return this.http.get(url).toPromise();
+  }
+
+  retrieveRecentProductByCat(): Promise<any>{
+    const url = AUTH_SERVICIOS.recentProductsByCat;
+
+    return this.http.get(url).toPromise();
+  }
+
 
 }

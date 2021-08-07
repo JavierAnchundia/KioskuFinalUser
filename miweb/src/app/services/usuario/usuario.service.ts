@@ -20,7 +20,7 @@ export class UsuarioService {
 
   constructor(
     public http: HttpClient,
-    public router: Router
+    public router: Router,
   ) {
     this.loadStorage();
     this.httpOptions = {
@@ -120,30 +120,30 @@ export class UsuarioService {
         Authorization: 'Bearer ' + this.getToken(),
       })
     };
-    return this.http.post(url, usuario, httpOptions);
+    return this.http.post(url, usuario);
   }
 
   // Obtener informacion de un usuario
-  getUserInfo(id: string): Observable<object> {
+  getUserInfo(id: string): Promise<any> {
     const url = AUTH_SERVICIOS.user + id + '/';
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.getToken(),
       })
     };
-    return this.http.get(url, httpOptions);
+    return this.http.get(url, httpOptions).toPromise();
 
   }
 
   // Editar usuario
-  updateUser(id: string, data: any): Observable<object> {
+  updateUser(id: string, data: any): Promise<any> {
     const url = AUTH_SERVICIOS.user + id + '/';
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + this.getToken(),
       })
     };
-    return this.http.put(url, data, httpOptions);
+    return this.http.put(url, data, httpOptions).toPromise();
   }
 
   //Estado de usuario
