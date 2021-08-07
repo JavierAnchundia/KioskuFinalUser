@@ -1,12 +1,12 @@
 body{
   font-family: 'Roboto', sans-serif;
-  margin:0px !important;
+  margin:0 !important;
   overflow: hidden;
 }
 .add-btn{
   position: fixed;
   right: 25px;
-  bottom: 20Px;
+  bottom: 10Px;
 }
 
 /** form **/
@@ -60,19 +60,19 @@ body{
 .btn{
   display: block;
   width: 100%;
-  padding: 5% !important;
+  padding: 1% !important;
   font-size: 1.5em;
   font-weight: 200;
-  margin-top: 18px;
+  margin-top: 10px;
 }
+
 .custom-btn{
-  margin-bottom: 15px;
-  background: #809b97;
-  color: #fff;
+  margin-bottom: 10px;
+  background: #F8DC7B;
+  color: #452cd4;
+  font-weight: 300;
 }
-.google-icon{
-  width: 6%;
-}
+
 .txt{
   text-align: center;
   color: #333;

@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
 
   loadUserInfo(): void {
 
-    this.usuario.getUserInfo(this.userID).subscribe(
+    this.usuario.getUserInfo(this.userID).then(
       (data: any) => {
         this.user = data;
         Swal.close();
@@ -76,10 +76,10 @@ export class LoginComponent implements OnInit {
   openSignUpModal(): void{
 
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.height = '550px'
-    dialogConfig.width = '450px'
+    dialogConfig.height = '500px'
+    dialogConfig.width = '600px'
     dialogConfig.position = {
-      'top': '2px',
+      'top': '10px',
     };
     this.dialog.open(SignupComponent, dialogConfig);
     dialogConfig.disableClose = true;

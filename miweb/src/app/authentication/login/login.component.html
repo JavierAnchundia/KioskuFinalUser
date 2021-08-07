@@ -1,10 +1,9 @@
-
 <div class="d-flex justify-content-between">
-  <h2 class="text-center" mat-dialog-title>Inicia sesión</h2>
+  <h2 class="text-center" mat-dialog-title>Inicio de sesión</h2>
   <button type="button" class="btn-close" (click)="closeDialog()"></button>
 </div>
-<form  [formGroup]="loginForm!" (ngSubmit)="submitForm(loginForm.value)">
-  <div mat-dialog-content  class="form-body">
+<form [formGroup]="loginForm!" (ngSubmit)="submitForm(loginForm.value)">
+  <div mat-dialog-content class="form-body">
     <mat-form-field class="justifier">
       <input formControlName="email" matInput autofocus placeholder="Correo electrónico" text="email"
         class="form-input">
@@ -30,6 +29,6 @@
 </form>
 
 <div class="additional-link">
-  <a (click)="openSignUpModal()">¿No tienes cuenta? <strong> <a routerLink="/inicio/auth/signup">Crear
-        cuenta</a></strong></a>
+  <a>¿No tienes cuenta?
+    <strong><a (click)="openSignUpModal()">Crear cuenta</a></strong></a>
 </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { MustMatch } from 'src/app/config/helpers';
+import { LocationService } from 'src/app/services/location/location.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -15,20 +17,35 @@ export class SignupComponent implements OnInit {
    // Forms
    public signUpForm!: FormGroup;
 
+   // Lists
+   public provinces: any[] = [];
+   public cities: any[] = [];
+
   constructor(
     private fb: FormBuilder,
     private usuario: UsuarioService,
+    private location: LocationService,
     public dialogRef: MatDialogRef<SignupComponent>,
   ) { }
 
   ngOnInit(): void {
+    this.loadProvinces();
     this.signUpForm = this.fb.group({
       name: [null, [Validators.required]],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required]],
+      confirmPassword: ['', Validators.required],
       address: [''],
-    })
+      city: [null,],
+      province: [null, ]
+    },
+    {
+      validator: MustMatch('password', 'confirmPassword')
+  });
   }
+
+  get f() { return this.signUpForm.controls; }
+
 
   submitForm(form: any): void {
 
@@ -61,10 +78,26 @@ export class SignupComponent implements OnInit {
       usuarioF.append('password', form.password);
       usuarioF.append('address', form.address);
       usuarioF.append('is_active', 'True');
+      usuarioF.append('ciudad', form.city);
+      usuarioF.append('provincia', form.province);
       return usuarioF;
     }
 
     closeDialog(): void {
       this.dialogRef.close();
     }
+
+    loadProvinces(): void{
+      this.location.retrieveProvinces()
+      .then(data => this.provinces = data)
+      .catch(err => console.log(err))
+    }
+
+    loadCities(event: any): void{
+      console.log(event);
+      this.location.retrieveCities(event)
+      .then(data => this.cities = data)
+      .catch(err => console.log(err))
+    }
+
 }
