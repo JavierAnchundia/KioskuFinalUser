@@ -1,0 +1,69 @@
+<div class="card" *ngIf="this.productsList.length && this.productsList.length > 0">
+  <div class="row">
+    <div class="col-md-8 cart">
+      <div class="title">
+        <div class="row">
+          <div class="col">
+            <h4><b>Carro de compras</b></h4>
+          </div>
+          <div class="col align-self-center text-right text-muted"> {{ getTotalProducts() }} productos</div>
+        </div>
+      </div>
+      <div class="row border-top border-bottom" *ngFor="let product of this.productsList">
+        <div class="row main align-items-center">
+          <div class="col-2"><img class="img-fluid" [src]="product.thumbnail"></div>
+          <div class="col-4">
+            <div class="row small product-title" (click)="openProductDetail(product.id)">{{ product.titulo }}</div>
+            <span class="small" *ngIf="product.disponible">Disponible</span>
+            <span class="small" *ngIf="!product.disponible">No disponible</span>
+          </div>
+          <div class="col">
+            <a (click)="removeProductUnit(product)">-</a>
+            <a class="border">{{product.addedQty}}</a>
+            <a (click)="addProductUnit(product)">+</a>
+          </div>
+          <div class="col">{{ getTotalPriceItem(product?.precio, product?.addedQty)}} C
+            <span class="close" (click)="removeProduct(product)" >&#10005;</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="back-to-shop">
+        <a class="text-muted" routerLink="/inicio/productos/lista"> <i class="fa fa-chevron-left"></i> Continuar
+          comprando </a>
+
+      </div>
+    </div>
+    <div class="col-md-4 summary">
+      <div>
+        <h5><b>Resumen</b></h5>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col" style="padding-left:0;">Subtotal</div>
+        <div class="col text-right">$ {{ this.getSubtotal() | number:'1.2-2' }}</div>
+      </div>
+      <div class="row">
+        <div class="col" style="padding-left:0;">Tarifa de envío</div>
+        <div class="col text-right">$ 0.00</div>
+      </div>
+      <div class="row">
+        <div class="col text-left" style="padding-left:0;">Descuento</div>
+        <div class="col text-right">$ 0.00</div>
+      </div>
+      <!-- <form>
+        <p>Tarifa de envío</p>
+        <select>
+          <option class="text-muted">Standard-Delivery- &euro;5.00</option>
+        </select>
+        <p>GIVE CODE</p> <input id="code" placeholder="Enter your code">
+      </form> -->
+      <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+        <div class="col">TOTAL</div>
+        <div class="col text-right">$ {{ this.getGlobalTotal() | number:'1.2-2' }}</div>
+      </div> <button class="btn">Proceder al pago</button>
+    </div>
+  </div>
+</div>
+<app-empty-cart *ngIf="this.productsList.length === 0 || this.productsList.length === undefined"></app-empty-cart>
