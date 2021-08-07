@@ -1,8 +1,10 @@
 <div class="content mx-auto">
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>Postula un nuevo artículo</mat-card-title>
-    </mat-card-header>
+    <div class="align-items-center">
+      <h1 class="display-5 fw-normal">
+        Postula un nuevo artículo
+      </h1>
+    </div>
     <mat-card-content>
       <form [formGroup]="itemForm!" (ngSubmit)="submit()">
         <mat-form-field class="item-form-field" appearance="outline">
@@ -37,7 +39,7 @@
             </mat-form-field>
           </div>
         </div>
-        
+
         <div class="form-group">
 
           <nz-upload nzListType="picture"

@@ -3,8 +3,8 @@
   <div class="row">
     <div class="col-md-12 col-sm-8 col-md-8">
       <div class="row text-white mb-1">
-        <div class="col-lg-7">
-          <h1 class="display-6">Artículos postulados</h1>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+          <h1 class="display-6 fw-normal">Artículos postulados</h1>
         </div>
       </div>
       <div *ngIf="this.itemsList.length === 0">
@@ -41,8 +41,8 @@
               </div> <!-- info-price-detail // -->
               <br>
               <p *ngIf="item.estado.estado === 'Admitido'">
-                <a class="btn btn-primary btn-block"> Aceptar </a>
-                <a class="btn btn-light btn-block">
+                <a class="btn btn-accept btn-block" (click)="createComponentModal(actionOptions.YES, item)"> Aceptar </a>
+                <a class="btn btn-reject btn-block" (click)="createComponentModal(actionOptions.NO, item)">
                   <span class="text">Rechazar</span>
                 </a>
               </p>
@@ -50,6 +50,9 @@
           </aside> <!-- col.// -->
         </div> <!-- row.// -->
       </article> <!-- card-product .// -->
+    </div>
+    <div class="m-4">
+      <nz-pagination [nzPageIndex]="1" [nzTotal]="this.totalLength" [nzPageSize]="this.pageSize" (nzPageIndexChange)="onIndexChange($event)"></nz-pagination>
     </div>
   </div>
 

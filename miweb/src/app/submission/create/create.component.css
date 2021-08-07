@@ -1,3 +1,7 @@
+*{
+  font-family: Nunito;
+}
+
 .content{
   align-items: center;
   justify-content: center;
@@ -16,7 +20,12 @@ mat-card{
 }
 
 mat-card-title{
-  color: #2f626b;
+  text-align: center;
+}
+
+h1{
+  color: #732C7B;
+  text-align: center;
 }
 
 .btn-submit {
@@ -26,14 +35,15 @@ mat-card-title{
   margin-top: 2px;
   padding:0 20px;
   height: 40px;
-  background-color: #c09456;
-  border: 1px solid #c09456;
-  color: #fff;
+  background-color: #f7d765;
+  border: 1px solid #f7d765;
+  color: #080808;
+  font-weight: 600;
   cursor: pointer;
 }
 
 .btn-create:hover{
-  background-color: #85663b;
+  background-color: #f3cc3f;
   cursor: pointer;
 }
 

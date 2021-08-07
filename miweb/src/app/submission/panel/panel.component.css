@@ -1,5 +1,5 @@
 h1{
-  color: #2f626b;
+  color: #732C7B;
   font-weight: 400;
 }
 
@@ -15,7 +15,7 @@ nz-list-item:hover{
 }
 
 ant-list-item-meta-description{
-  color: #378578
+  color: #6144ff
 }
 
 i{
@@ -32,7 +32,7 @@ a[class*=card] {
   color: initial;
 }
 a[class*=card]:hover .title {
-  color: #2f626b;
+  color: #732C7B;
 }
 
 
@@ -47,6 +47,7 @@ a[class*=card]:hover .title {
   height: 100%;
   max-width: 100%;
   width: auto;
+  padding: 10px;
   display: inline-block;
   -o-object-fit: cover;
      object-fit: cover;
@@ -98,4 +99,32 @@ a[class*=card]:hover .title {
 
 .box img {
   max-width: 100%;
+}
+
+.btn-accept{
+  background-color: #f8dc7b;
+  color: #000;
+  margin-right: 2px;
+  border: 2px solid #f8dc7b;
+}
+
+.btn-reject{
+  background-color: #fff;
+  color: #c9a626;
+  border: 2px solid #f7d55c;
+}
+
+.btn{
+  border-radius: 0;
+}
+
+.card {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1000px;
+  width: 95%;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 1rem;
+  border: transparent;
 }

@@ -1,0 +1,15 @@
+<div class="d-flex justify-content-between">
+  <mat-icon>error_outline</mat-icon>
+  <h4 mat-dialog-title>
+    Aceptar créditos</h4>
+  <button type="button" class="btn-close" (click)="closeDialog()"></button>
+</div>
+<div class="content mx-auto modal-body">
+  <h6>{{ this.currItem.titulo | uppercase}}</h6>
+  <p>¿Está seguro que desea aceptar los créditos asignados?</p>
+  <p>Créditos: <strong>{{ this.currItem?.creditos}}</strong></p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-secondary" (click)="closeDialog()">Cancelar</button>
+  <button type="button" class="btn btn-confirm" (click)="updateItemState()">Confirmar</button>
+</div>
