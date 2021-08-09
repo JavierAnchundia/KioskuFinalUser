@@ -3,21 +3,6 @@ h1{
   font-weight: 400;
 }
 
-nz-list-item{
-  border: 1px solid black;
-  border-left: 0;
-  border-right: 0;
-  border-radius: 0;
-}
-
-nz-list-item:hover{
-  background-color: #f1efecde
-}
-
-ant-list-item-meta-description{
-  color: #6144ff
-}
-
 i{
   vertical-align: 0;
 
@@ -124,7 +109,7 @@ a[class*=card]:hover .title {
   margin-right: auto;
   max-width: 1000px;
   width: 95%;
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 6px 15px 0 rgba(0, 0, 0, 0.521);
   border-radius: 1rem;
   border: transparent;
 }

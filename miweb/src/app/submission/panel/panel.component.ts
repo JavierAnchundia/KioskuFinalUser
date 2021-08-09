@@ -4,7 +4,6 @@ import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditItemComponent } from '../edit-item/edit-item.component'
-import { CreditsComponent } from '../credits/credits.component';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { CreditsModalComponent } from '../credits-modal/credits-modal.component';
 
@@ -96,25 +95,6 @@ export class PanelComponent implements OnInit {
         console.log(error);
         this.nzMessageService.info('No se pudo eliminar el ítem.')
       })
-  }
-
-  openCreditsModel(item: any): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.position = {
-      'top': '10px',
-    };
-    dialogConfig.width = '500px';
-    dialogConfig.disableClose = true;
-    dialogConfig.data = {
-      item
-    };
-    const dialogRef = this.dialog.open(CreditsComponent, dialogConfig);
-    dialogRef.afterClosed().toPromise().then((result: any) => {
-      if (result.event == 'Updated') {
-        this.loadItems();
-      }
-    }
-    );
   }
 
   showConfirm(data: any): void {
