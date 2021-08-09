@@ -4,6 +4,8 @@ import { LocationService } from '../../services/location/location.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from 'src/app/config/helpers';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { PurchaseCreditsComponent } from '../purchase-credits/purchase-credits.component';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-profile',
@@ -16,9 +18,8 @@ export class ProfileComponent implements OnInit {
   public editEnabled = false;
   public provinces: any[] = [];
   public cities: any[] = [];
-  public cityId = '';
   public provinceId = '';
-
+  public numericNumberReg = '[0-9]*';
   // Forms
   public signUpForm!: FormGroup;
 
@@ -27,6 +28,7 @@ export class ProfileComponent implements OnInit {
     private location: LocationService,
     private fb: FormBuilder,
     private message: NzMessageService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +39,9 @@ export class ProfileComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
       address: [''],
       city: [null,],
-      province: [null, ]
+      province: [null, ],
+      celular: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(this.numericNumberReg)]],
+      cedula: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(this.numericNumberReg)]]
     },
     );
 
@@ -81,7 +85,9 @@ export class ProfileComponent implements OnInit {
         email: this.currentUserInfo?.email,
         address: this.currentUserInfo?.address,
         city: this.currentUserInfo?.ciudad.id,
-        province: this.currentUserInfo?.provincia.id
+        province: this.currentUserInfo?.provincia.id,
+        celular: this.currentUserInfo.celular,
+        cedula: this.currentUserInfo.cedula,
       });
       this.loadProvinces();
       this.loadCities();
@@ -108,6 +114,8 @@ export class ProfileComponent implements OnInit {
     userProfile.append('address', form.address);
     userProfile.append('ciudad', form.city);
     userProfile.append('provincia', form.province);
+    userProfile.append('cedula', form.cedula);
+    userProfile.append('celular', form.celular);
 
     this.usuario.updateUser(this.currentUserInfo.id, userProfile)
     .then((resp: any) => {
@@ -117,5 +125,20 @@ export class ProfileComponent implements OnInit {
       this.loadCurrentUserInfo();
     })
     .catch(error => console.log(error))
+  }
+
+  openCreditsModal(): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.position = {
+      'top': '20',
+    };
+    dialogConfig.width = '400px'
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(PurchaseCreditsComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result.event == 'Purchased') {
+        this.loadCurrentUserInfo();
+      }
+    });
   }
 }

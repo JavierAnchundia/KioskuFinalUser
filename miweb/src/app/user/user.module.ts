@@ -8,11 +8,15 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
+import { PurchaseCreditsComponent } from './purchase-credits/purchase-credits.component';
 
 
 @NgModule({
   declarations: [
-    ProfileComponent
+    ProfileComponent,
+    PurchaseHistoryComponent,
+    PurchaseCreditsComponent
   ],
   imports: [
     CommonModule,

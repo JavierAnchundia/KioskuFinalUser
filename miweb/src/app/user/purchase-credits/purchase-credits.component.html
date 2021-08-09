@@ -1,0 +1,12 @@
+<div class="d-flex justify-content-between">
+  <h2 class="text-center" mat-dialog-title>Comprar saldo</h2>
+  <button type="button" class="btn-close" (click)="closeDialog()"></button>
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Ingrese el número de créditos a comprar</label>
+  <input type="number" class="form-control" id="formGroupExampleInput">
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-cancel" (click)="closeDialog()">Cancelar</button>
+  <button type="button" class="btn btn-pay" routerLink="/inicio/checkout/facturacion">Proceder al pago</button>
+</div>

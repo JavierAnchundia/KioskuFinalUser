@@ -17,7 +17,6 @@ import { EditItemComponent } from './edit-item/edit-item.component';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzListModule } from 'ng-zorro-antd/list';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { CreditsComponent } from './credits/credits.component';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzMessageModule } from 'ng-zorro-antd/message';
@@ -30,7 +29,6 @@ import { CreditsModalComponent } from './credits-modal/credits-modal.component';
     CreateComponent,
     PanelComponent,
     EditItemComponent,
-    CreditsComponent,
     CreditsModalComponent
   ],
   imports: [

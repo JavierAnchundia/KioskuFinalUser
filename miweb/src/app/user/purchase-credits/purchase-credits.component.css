@@ -1,0 +1,16 @@
+.btn-pay{
+  background-color: #6144FF;
+  color: #fff;
+  margin-right: 2px;
+  border: 1px solid #6144FF;
+}
+
+.btn-cancel{
+  background-color: #fff;
+  color: #6144FF;
+  border: 1px solid #6144FF;
+}
+
+.btn{
+  border-radius: 0;
+}
