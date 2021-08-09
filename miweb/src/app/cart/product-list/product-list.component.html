@@ -42,15 +42,15 @@
       <hr>
       <div class="row">
         <div class="col" style="padding-left:0;">Subtotal</div>
-        <div class="col text-right">$ {{ this.getSubtotal() | number:'1.2-2' }}</div>
+        <div class="col text-right">{{ this.getSubtotal() | number:'1.2-2' }} C</div>
       </div>
       <div class="row">
         <div class="col" style="padding-left:0;">Tarifa de envío</div>
-        <div class="col text-right">$ 0.00</div>
+        <div class="col text-right">0.00 C</div>
       </div>
       <div class="row">
         <div class="col text-left" style="padding-left:0;">Descuento</div>
-        <div class="col text-right">$ 0.00</div>
+        <div class="col text-right">{{ this.getDiscountAmount(this.getSubtotal()) | number:'1.2-2'}} C</div>
       </div>
       <!-- <form>
         <p>Tarifa de envío</p>
@@ -61,8 +61,8 @@
       </form> -->
       <div class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
         <div class="col">TOTAL</div>
-        <div class="col text-right">$ {{ this.getGlobalTotal() | number:'1.2-2' }}</div>
-      </div> <button class="btn">Proceder al pago</button>
+        <div class="col text-right">{{ this.getGlobalTotal() | number:'1.2-2' }} C</div>
+      </div> <button class="btn" routerLink="/inicio/checkout/facturacion" >Proceder al pago</button>
     </div>
   </div>
 </div>

@@ -3,6 +3,7 @@ import { NavigationExtras, Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { Producto } from 'src/app/models/producto';
 import { CarroComprasService } from 'src/app/services/carro-compras/carro-compras.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 
 @Component({
   selector: 'app-product-list',
@@ -12,14 +13,25 @@ import { CarroComprasService } from 'src/app/services/carro-compras/carro-compra
 export class ProductListComponent implements OnInit {
 
   public productsList: Producto[] = [];
+  private discountCurr: number = 0;
+
   constructor(
     private cart: CarroComprasService,
     private router: Router,
     private message: NzMessageService,
+    private usuario: UsuarioService,
   ) { }
 
   ngOnInit(): void {
     this.loadCartItems();
+    this.loadUserInfo();
+  }
+
+  loadUserInfo(): void{
+    this.usuario.getUserInfo(this.usuario.getCurrentUserId())
+    .then(user => {
+      this.discountCurr = user.membresia.pct_dscto;
+    })
   }
 
   loadCartItems(): void{
@@ -48,11 +60,10 @@ export class ProductListComponent implements OnInit {
   }
 
   getGlobalTotal(): number{
-    let totalGlobal = 0;
-    this.productsList.forEach((prod: Producto) => {
-        totalGlobal += prod.addedQty * Number(prod.precio);
-    })
-    return totalGlobal;
+    const subtotal = this.getSubtotal();
+    const discount = this.getDiscountAmount(subtotal);
+
+    return subtotal - discount;
   }
 
   removeProductUnit(product: Producto): void{
@@ -95,6 +106,10 @@ export class ProductListComponent implements OnInit {
 
   createMessage(type: string, message: string): void {
     this.message.create(type, message);
+  }
+
+  getDiscountAmount(subtotal: number): number{
+    return subtotal * (this.discountCurr / 100);
   }
 
 }
