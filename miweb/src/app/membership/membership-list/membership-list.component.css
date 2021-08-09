@@ -8,18 +8,25 @@
   border-bottom: 0;
 }
 
+.card-header:first-child{
+  border-radius: 1rem;
+}
+
 .btn{
   border-radius: 0;
 }
 
 .card{
-  min-height: 200px;
+  border-radius: 1rem;
+  border: transparent;
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.671);
+  min-height: 250px;
 }
-
 
 .card:hover{
-  box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.856);
+  border: solid 1px #6144ff;
 }
+
 
 h1{
   color: #732C7B;

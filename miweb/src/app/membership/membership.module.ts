@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { MembershipRoutingModule } from './membership-routing.module';
 import { MembershipListComponent } from './membership-list/membership-list.component';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 
 @NgModule({
@@ -11,7 +13,9 @@ import { MembershipListComponent } from './membership-list/membership-list.compo
   ],
   imports: [
     CommonModule,
-    MembershipRoutingModule
+    MembershipRoutingModule,
+    NzMessageModule,
+    NzModalModule
   ]
 })
 export class MembershipModule { }
