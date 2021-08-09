@@ -39,6 +39,7 @@
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li><a class="dropdown-item" routerLink="usuario/perfil">Ver perfil</a></li>
                 <li><a class="dropdown-item" routerLink="postular/items">Ver ítems postulados</a></li>
+                <li><a class="dropdown-item" routerLink="usuario/historial">Ver historial de compras</a></li>
                 <li><a class="dropdown-item" (click)="confirmLogout()">Cerrar sesión</a></li>
               </ul>
             </a>
@@ -87,6 +88,7 @@
             <ul nz-menu nzSelectable>
               <li nz-menu-item routerLink="usuario/perfil">Ver perfil</li>
               <li nz-menu-item routerLink="postular/items">Ver ítems postulados</li>
+              <li nz-menu-item routerLink="usuario/historial">Ver historial de compras</li>
               <li nz-menu-item nzDanger (click)="confirmLogout()">Cerrar sesión</li>
             </ul>
           </nz-dropdown-menu>
