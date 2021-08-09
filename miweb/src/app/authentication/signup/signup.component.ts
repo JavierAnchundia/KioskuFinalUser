@@ -16,11 +16,14 @@ export class SignupComponent implements OnInit {
 
    // Forms
    public signUpForm!: FormGroup;
+   private user: any;
+   public userID: any;
 
    // Lists
    public provinces: any[] = [];
    public cities: any[] = [];
 
+   public numericNumberReg = '[0-9]*';
   constructor(
     private fb: FormBuilder,
     private usuario: UsuarioService,
@@ -37,11 +40,18 @@ export class SignupComponent implements OnInit {
       confirmPassword: ['', Validators.required],
       address: [''],
       city: [null,],
-      province: [null, ]
+      province: [null, ],
+      celular: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(this.numericNumberReg)]],
+      cedula: [null, [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern(this.numericNumberReg)]]
     },
     {
       validator: MustMatch('password', 'confirmPassword')
   });
+
+  this.user = {
+    email: ' ',
+    password: ' '
+  };
   }
 
   get f() { return this.signUpForm.controls; }
@@ -56,7 +66,19 @@ export class SignupComponent implements OnInit {
       const fd = this.buildFormData(form);
       this.usuario.registerUser(fd).subscribe(
         (data: any) => {
+          this.user.email = form.email;
+          this.user.password = form.password;
+
           Swal.fire('El usuario se ha agregado con éxito.');
+
+          this.usuario.loginUser(this.user)
+          .subscribe(async resp => {
+            this.userID = JSON.parse(localStorage.getItem('user') || '{}').user_id;
+            this.loadUserInfo();
+          }, error => {
+            console.log(error);
+            Swal.fire('Correo o contraseña incorrectos.', 'Intente nuevamente');
+          });
         },
         (error: any) => {
           if (error.error.email) {
@@ -80,6 +102,9 @@ export class SignupComponent implements OnInit {
       usuarioF.append('is_active', 'True');
       usuarioF.append('ciudad', form.city);
       usuarioF.append('provincia', form.province);
+      usuarioF.append('cedula', form.cedula);
+      usuarioF.append('celular', form.celular);
+      usuarioF.append('saldo', '0');
       return usuarioF;
     }
 
@@ -98,6 +123,18 @@ export class SignupComponent implements OnInit {
       this.location.retrieveCities(event)
       .then(data => this.cities = data)
       .catch(err => console.log(err))
+    }
+
+    loadUserInfo(): void {
+
+      this.usuario.getUserInfo(this.userID).then(
+        (data: any) => {
+          this.user = data;
+          Swal.close();
+          this.dialogRef.close({ event: 'UserLogged' });
+          this.usuario.setUserStatus(true);
+          location.reload()
+        });
     }
 
 }

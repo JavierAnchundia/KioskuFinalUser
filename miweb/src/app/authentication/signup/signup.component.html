@@ -71,12 +71,46 @@
           <mat-error *ngIf="f.confirmPassword.touched && f.confirmPassword.errors?.mustMatch">
             Las contraseñas no coinciden.
           </mat-error>
-
-
         </mat-form-field>
       </div>
     </div>
-
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="justifier">
+          <input formControlName="celular" matInput placeholder="Celular" type="text" class="form-input" minlength="10" maxlength="10">
+          <mat-error
+            *ngIf="signUpForm.controls['celular'].touched && signUpForm.controls['celular'].hasError('required')">
+            Este campo es obligatorio.
+          </mat-error>
+          <mat-error
+            *ngIf="signUpForm.controls['celular'].touched && (signUpForm.controls['celular'].hasError('maxlength') || signUpForm.controls['celular'].hasError('minlength'))">
+            La longitud del campo es de 10 dígitos.
+          </mat-error>
+          <mat-error
+            *ngIf="signUpForm.controls['celular'].touched && (signUpForm.controls['celular'].hasError('pattern'))">
+            El valor ingresado no es válido.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="justifier">
+          <input formControlName="cedula" matInput placeholder="Cedula" type="text" minlength="10" maxlength="10"
+            class="form-input">
+          <mat-error
+            *ngIf="signUpForm.controls['cedula'].touched && signUpForm.controls['cedula'].hasError('required')" minlength="10" maxlength="10">
+            Este campo es obligatorio.
+          </mat-error>
+          <mat-error
+          *ngIf="signUpForm.controls['cedula'].touched && (signUpForm.controls['cedula'].hasError('maxlength') || signUpForm.controls['cedula'].hasError('minlength'))">
+          La longitud del campo es de 10 dígitos.
+        </mat-error>
+        <mat-error
+          *ngIf="signUpForm.controls['cedula'].touched && (signUpForm.controls['cedula'].hasError('pattern'))">
+          El valor ingresado no es válido.
+        </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
   </div>
   <div class="form-footer">
     <button mat-raised-button class="btn custom-btn" type="submit">
