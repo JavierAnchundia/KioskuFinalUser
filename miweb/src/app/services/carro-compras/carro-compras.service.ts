@@ -18,7 +18,7 @@ export class CarroComprasService {
   ) { }
 
   createCarro(carro: any): Promise<any> {
-    const url = AUTH_SERVICIOS.shoppingCart;
+    const url = AUTH_SERVICIOS.carro_compras;
 
     return this.http.post<any>(url, carro).toPromise();
   }
@@ -97,5 +97,35 @@ export class CarroComprasService {
       .subscribe(() => {
         console.log('¡Solicitud completada!');
       });
+  }
+
+  createPurchaseOrder(order: any): Promise<any> {
+    const url = AUTH_SERVICIOS.factura;
+
+    return this.http.post<any>(url, order).toPromise();
+  }
+
+  createCartProduct(productos: any): Promise<any> {
+    const url = AUTH_SERVICIOS.carro_producto;
+
+    return this.http.post<any>(url, productos).toPromise();
+  }
+
+  createPurchaseState(estado: any): Promise<any>{
+    const url = AUTH_SERVICIOS.estado_compra;
+
+    return this.http.post<any>(url, estado).toPromise();
+  }
+
+  updateCarro(id: string, carro: any): Promise<any> {
+    const url = AUTH_SERVICIOS.carro_compras + id + '/';
+
+    return this.http.put<any>(url, carro).toPromise();
+  }
+
+  retrieveCarroById(id: string): Promise<any> {
+    const url = AUTH_SERVICIOS.carro_compras + id + '/';
+
+    return this.http.get<any>(url).toPromise();
   }
 }
