@@ -130,15 +130,15 @@ export class ProfileComponent implements OnInit {
   openCreditsModal(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.position = {
-      'top': '20',
+      'top': '20px',
     };
     dialogConfig.width = '400px'
     dialogConfig.disableClose = true;
     const dialogRef = this.dialog.open(PurchaseCreditsComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    /* dialogRef.afterClosed().subscribe(result => {
       if (result.event == 'Purchased') {
         this.loadCurrentUserInfo();
       }
-    });
+    }); */
   }
 }

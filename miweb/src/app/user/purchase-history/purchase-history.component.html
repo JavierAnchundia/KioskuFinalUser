@@ -1,57 +1,68 @@
 <div class="container mt-3 mb-4">
   <div class="heading">
-    <h1 class="display-5 fw-normal">Membresías</h1>
+    <h1 class="display-5 fw-normal">Historial de compras</h1>
   </div>
   <div class="col-lg-12 mt-4 mt-lg-0">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-lg">
-            <table class="table manage-candidates-top mb-0">
-              <thead>
-                <tr>
-                  <th>Orden de compra</th>
-                  <th class="text-center">Estado</th>
-                  <th class="action text-center">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="candidates-list">
-                  <td class="title">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-lg">
+          <nz-table #filterTable [nzData]="listData" nzTableLayout="fixed" class="table manage-candidates-top mb-0">
+            <thead>
+              <tr>
+                <th class="text-center" *ngFor="let column of listOfColumns" [nzSortOrder]="column.sortOrder" [nzSortFn]="column.sortFn"
+                  [nzSortDirections]="column.sortDirections" [nzFilterMultiple]="column.filterMultiple!"
+                  [nzFilters]="column.listOfFilter!"
+                  [nzFilterFn]="column.filterFn!">
+                  {{ column.name }}
+                </th>
+                <th class="action text-center">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="candidates-list" *ngFor="let orden of filterTable.data">
+                <td class="title">
+                  <div class="candidate-list-details">
+                    <div class="candidate-list-info">
+                      <div class="candidate-list-title">
+                        <h5 class="mb-0"><a>Orden Nº {{ orden?.id }} </a></h5>
+                      </div>
+                      <div class="candidate-list-option">
+                        <ul class="list-unstyled">
+                          <li><i class="fas fa-coins pr-1"></i> {{ orden?.total }} </li>
+                          <li><i class="fas fa-shopping-bag"></i> {{ orden?.totalCompra }} productos</li>
+                          <li><i class="fas fa-money-check-alt"></i> {{ orden?.pago }}</li>
 
-                    <div class="candidate-list-details">
-                      <div class="candidate-list-info">
-                        <div class="candidate-list-title">
-                          <h5 class="mb-0"><a>Orden Nº 1</a></h5>
-                        </div>
-                        <div class="candidate-list-option">
-                          <ul class="list-unstyled">
-                            <li><i class="fas fa-coins pr-1"></i> 234 </li>
-                            <li><i class="fas fa-shopping-bag"></i> 4 productos</li>
-                            <li><i class="fas fa-money-check-alt"></i> Tarjeta de crédito</li>
-
-                          </ul>
-                        </div>
+                        </ul>
                       </div>
                     </div>
-                  </td>
-                  <td class="candidate-list-favourite-time text-center">
-                    <a class="candidate-list-favourite order-2 text-success"><i class="fas fa-check-double"></i></a>
-                    <span class="candidate-list-time order-1"> Entregado</span>
-                  </td>
-                  <td>
-                    <ul class="list-unstyled mb-0 d-flex justify-content-center">
-                      <li><a class="text-primary"><i class="fas fa-file-invoice"></i></a></li>
-                    </ul>
-                  </td>
-                </tr>
-                
-              </tbody>
-            </table>
-            <div class="text-center mt-3 mt-sm-3">
-              <!-- aqui va la paginacion -->
-            </div>
+                  </div>
+                </td>
+                <td class="candidate-list-favourite-time text-center">
+                  {{ orden?.dateCreated | date }}
+                </td>
+                <td class="candidate-list-favourite-time text-center">
+                  <a class="candidate-list-favourite order-2 text-success" *ngIf="orden?.estadoCompra == 'Entregado'">
+                    <i class="fas fa-check-double"></i>
+                  </a>
+                  <a class="candidate-list-favourite order-2 text-primary" *ngIf="orden?.estadoCompra == 'Por entregar'">
+                    <i class="fas fa-clock"></i>
+                  </a>
+                  <span class="candidate-list-time order-1"> {{ orden?.estadoCompra }}</span>
+                </td>
+                <td>
+                  <ul class="list-unstyled mb-0 d-flex justify-content-center">
+                    <li><a class="text-primary"><i class="fas fa-file-invoice"></i></a></li>
+                  </ul>
+                </td>
+              </tr>
+
+            </tbody>
+          </nz-table>
+          <div class="text-center mt-3 mt-sm-3">
+            <!-- aqui va la paginacion -->
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

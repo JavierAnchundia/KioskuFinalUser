@@ -1,4 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { OrdenesService } from 'src/app/services/ordenes/ordenes.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
+import { OrdenCompra } from 'src/app/models/ordenCompra';
+
+interface ColumnItem {
+  name: string;
+  sortOrder: NzTableSortOrder | null;
+  sortFn: NzTableSortFn<OrdenCompra> | null;
+  sortDirections: NzTableSortOrder[];
+  listOfFilter?: NzTableFilterList;
+  filterFn?: NzTableFilterFn<OrdenCompra> | null;
+  filterMultiple?: boolean;
+}
 
 @Component({
   selector: 'app-purchase-history',
@@ -7,9 +21,58 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PurchaseHistoryComponent implements OnInit {
 
-  constructor() { }
+  private userId = '';
+  public listData: OrdenCompra[] = [];
+  public listOfColumns: ColumnItem[] = [
+    {
+      name: 'Orden de compra',
+      sortOrder: null,
+      sortFn: (a: OrdenCompra, b: OrdenCompra) => a.id - b.id,
+      sortDirections: ['ascend', 'descend', null],
+    },
+    {
+      name: 'Fecha',
+      sortOrder: 'descend',
+      sortFn: (a: OrdenCompra, b: OrdenCompra) => this.sortDateTime(a.dateCreated, b.dateCreated),
+      sortDirections: ['ascend', 'descend', null],
+    },
+    {
+      name: 'Estado',
+      sortOrder: null,
+      sortDirections: [null],
+      sortFn: (a: OrdenCompra, b: OrdenCompra) => a.estadoCompra.length - b.estadoCompra.length,
+      filterMultiple: true,
+      listOfFilter: [
+        { text: 'Por entregar', value: 'Por entregar' },
+        { text: 'Entregado', value: 'Entregado' }
+      ],
+      filterFn: (estado: string, item: OrdenCompra) => item.estadoCompra.indexOf(estado) !== -1
+    }
+  ]
+
+  constructor(
+    private orden: OrdenesService,
+    private usuario: UsuarioService,
+  ) { }
 
   ngOnInit(): void {
+    this.userId = this.usuario.getCurrentUserId();
+    this.loadHistory();
+  }
+
+  sortDateTime(date1: Date, date2: Date): number {
+    return Math.round((new Date(new Date(date2)).setHours(12)-new Date(new Date(date1)).setHours(12))/8.64e7);
+
+  }
+
+  loadHistory(): void{
+    this.orden.retrieveHistorial(this.userId)
+    .then((hist: any) => {
+      this.listData = hist;
+    })
+    .catch((error: any) => {
+      console.log(error);
+    })
   }
 
 }
