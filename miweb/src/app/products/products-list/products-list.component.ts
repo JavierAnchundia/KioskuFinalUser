@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
+import AUTH_SERVICIOS from 'src/app/config/urls';
 import { CarroComprasService } from 'src/app/services/carro-compras/carro-compras.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
@@ -27,6 +28,8 @@ export class ProductsListComponent implements OnInit {
   public filteredName: string[] = [];
   private options : string[] = [];
   public filteredProducts: any[] = [];
+  public mediaPath = AUTH_SERVICIOS.mediaURL;
+
 
   constructor(
     private categorias: CategoriaService,
@@ -78,7 +81,7 @@ export class ProductsListComponent implements OnInit {
           disponible: element?.disponible,
           creditos: element?.item.creditos,
           cantidad: element?.item.cantidad,
-          thumbnail: 'http://127.0.0.1:8000/static' + prod[1].filter((img: any) => img.producto === element?.id)[0].imagen
+          thumbnail: this.mediaPath + element?.thumbnail,
         });
 
         this.options.push(
@@ -90,7 +93,10 @@ export class ProductsListComponent implements OnInit {
 
       this.loading = false;
     })
-    .catch((error: any) => console.log(error))
+    .catch((error: any) => {
+      console.log(error);
+      this.loading = false;
+    })
   }
 
   onChangeCategory(value: any): void {
@@ -135,7 +141,7 @@ export class ProductsListComponent implements OnInit {
           disponible: element?.disponible,
           cantidad: element?.item.cantidad,
           creditos: element?.item.creditos,
-          thumbnail: 'http://127.0.0.1:8000/static' + prod[1].filter((img: any) => img.producto === element?.id)[0].imagen
+          thumbnail: this.mediaPath + element?.thumbnail,
         });
         this.options.push(
           element.titulo
@@ -165,7 +171,7 @@ export class ProductsListComponent implements OnInit {
           disponible: element?.disponible,
           creditos: element?.item.creditos,
           cantidad: element?.item.cantidad,
-          thumbnail: 'http://127.0.0.1:8000/static' + prod[1].filter((img: any) => img.producto === element?.id)[0].imagen
+          thumbnail: this.mediaPath + element?.thumbnail,
         });
         this.options.push(
           element.titulo

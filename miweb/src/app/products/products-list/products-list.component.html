@@ -94,9 +94,10 @@
 
         </aside>
         <main class="col-md-9">
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center mt-10">
             <nz-spin *ngIf="loading" nzSimple nzTip="Cargando..." [nzSize]="'large'"></nz-spin>
           </div>
+          
           <header>
             <h3>{{ this.currentCat.nombre}}</h3>
           </header>
@@ -111,7 +112,7 @@
                 <figcaption class="info-wrap">
                   <div class="fix-height">
                     <a class="title" (click)="openProductDetail(product.id)">{{ product.titulo }}</a>
-                    <div class="price-wrap mt-2 text-left">
+                    <div class="price-wrap mt-2 text-right">
                       <span class="price">{{ product.precio }} C</span>
                     </div> <!-- price-wrap.// -->
                   </div>
