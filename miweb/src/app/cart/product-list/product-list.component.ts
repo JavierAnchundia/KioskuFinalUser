@@ -14,6 +14,8 @@ export class ProductListComponent implements OnInit {
 
   public productsList: Producto[] = [];
   private discountCurr: number = 0;
+  private creditsCurr: number = 0;
+  private loadingId = '';
 
   constructor(
     private cart: CarroComprasService,
@@ -31,6 +33,7 @@ export class ProductListComponent implements OnInit {
     this.usuario.getUserInfo(this.usuario.getCurrentUserId())
     .then(user => {
       this.discountCurr = user.membresia.pct_dscto;
+      this.creditsCurr = user.saldo;
     })
   }
 
@@ -112,4 +115,52 @@ export class ProductListComponent implements OnInit {
     return subtotal * (this.discountCurr / 100);
   }
 
+  redirectPurchaseOrder(): void{
+    if (this.creditsCurr < this.getGlobalTotal()){
+      this.message.create('error', 'No cuenta con los créditos suficientes para continuar.')
+    } else {
+      this.createShoppingCart();
+    }
+  }
+
+  createShoppingCart(): void{
+    this.loadingId = this.message.loading('Procesando solicitud...').messageId;
+
+    const carroCompras = new FormData();
+    carroCompras.append('usuario', this.usuario.getCurrentUserId());
+    carroCompras.append('subtotal', String(this.getSubtotal()));
+    carroCompras.append('descuento', String(this.getDiscountAmount(this.getSubtotal())));
+    carroCompras.append('totalProduct', String(this.getTotalProducts()));
+    carroCompras.append('estado', 'En checkout');
+
+    this.cart.createCarro(carroCompras)
+    .then((cart: any) => {
+      this.createCartProducts(cart.id);
+    })
+    .catch((error: any) => console.log(error))
+  }
+
+  createCartProducts(id: string): void{
+    const cartProducts: any[] = [];
+    this.productsList.forEach((product: Producto) => {
+      cartProducts.push({
+        producto: product.id,
+        cantidad: product.addedQty,
+        carro: id
+      })
+    });
+
+    this.cart.createCartProduct(cartProducts)
+    .then((cart: any) => {
+      this.message.remove(this.loadingId);
+      this.message.create('info', 'Redirigiendo a la página...').onClose.subscribe(()=> {
+        const orderType = 'item';
+        const cartId = id;
+        this.router.navigate(['/inicio/checkout/facturacion'], { queryParams:  {orderType, cartId} , skipLocationChange: true});
+
+      })
+    })
+    .catch((error: any) => console.log(error))
+
+  }
 }

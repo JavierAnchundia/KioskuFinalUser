@@ -64,6 +64,7 @@ export class LoginComponent implements OnInit {
     this.usuario.getUserInfo(this.userID).then(
       (data: any) => {
         this.user = data;
+        localStorage.setItem('type', data.rol);
         Swal.close();
         this.dialogRef.close({ event: 'UserLogged' });
       });

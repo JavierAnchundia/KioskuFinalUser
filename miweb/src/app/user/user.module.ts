@@ -10,6 +10,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { PurchaseCreditsComponent } from './purchase-credits/purchase-credits.component';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { PurchaseCreditsComponent } from './purchase-credits/purchase-credits.co
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    NzMessageModule
+    NzMessageModule,
+    NzTableModule
   ]
 })
 export class UserModule { }
