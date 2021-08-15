@@ -130,6 +130,15 @@ img {
   font-weight: bold;
 }
 
+.quantity{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 2em;
+  border-radius: 2px;
+  color: rgb(124, 124, 124);
+}
+
 .add-to-cart {
   background: #f8dc7b;
   padding: 0.5em 1.5em;

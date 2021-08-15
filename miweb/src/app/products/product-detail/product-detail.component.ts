@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import AUTH_SERVICIOS from 'src/app/config/urls';
 import { Producto } from 'src/app/models/producto';
 import { CarroComprasService } from 'src/app/services/carro-compras/carro-compras.service';
 import { ImagenProductoService } from 'src/app/services/imagen-producto/imagen-producto.service';
@@ -16,6 +17,7 @@ export class ProductDetailComponent implements OnInit {
   public currentProduct: any;
   public imagesList: any[] = [];
   public currentDisplayPic: string = '';
+  public mediaPath = AUTH_SERVICIOS.mediaURL;
 
   constructor(
     private producto: ProductoService,
@@ -49,18 +51,16 @@ export class ProductDetailComponent implements OnInit {
     this.imgProducto.retrieveImagesByProduct(this.params.producto)
       .then(img => {
         this.imagesList = img;
-        this.currentDisplayPic = 'http://127.0.0.1:8000/static' + img[0]['imagen'];
-        console.log(img)
+        this.currentDisplayPic = this.mediaPath + img[0]['imagen'];
       })
       .catch(error => console.log(error))
   }
 
   changeCurrentDisplayPic(path: string): void {
-    this.currentDisplayPic = 'http://127.0.0.1:8000/static' + path;
+    this.currentDisplayPic = this.mediaPath + path;
   }
 
   addToCart(product: Producto) {
-    console.log(product);
     product.thumbnail = this.currentDisplayPic;
     this.carro.addToCart(product);
   }
