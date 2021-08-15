@@ -15,11 +15,13 @@
             <li>Descuento del {{ mem.pct_dscto}}% en tus compras</li>
 
           </ul>
-          <button type="button" class="w-100 btn btn-lg btn-signup" *ngIf="mem.tarifa !== '0.00'"
-          [disabled]="mem.id === this.currentUserMem"
+          <button type="button" class="w-100 btn btn-lg btn-signup" *ngIf="mem.tarifa !== '0.00' && mem.id !== this.currentUserMem"
           (click)="subscribe(mem)">
-            <span *ngIf="mem.id !== this.currentUserMem">Suscribirse</span>
-            <span *ngIf="mem.id === this.currentUserMem">Plan actual</span>
+            <span>Suscribirse</span>
+          </button>
+          <button (click)="cancelSubscription()" type="button" class="w-100 btn btn-lg cancelBtn" *ngIf="mem.tarifa !== '0.00' && mem.id === this.currentUserMem"
+          >
+            <span>Cancelar</span>
           </button>
         </div>
       </div>
