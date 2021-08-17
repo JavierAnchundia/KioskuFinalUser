@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
+import AUTH_SERVICIOS from 'src/app/config/urls';
 import { AnuncioService } from 'src/app/services/anuncio/anuncio.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 
@@ -11,6 +12,8 @@ import { ProductoService } from 'src/app/services/producto/producto.service';
 export class HomeComponent implements OnInit {
   public anuncioList: any[] = [];
   public recent: any[] = [];
+  public mediaPath = AUTH_SERVICIOS.mediaURL;
+
 
   constructor(
     private anuncio: AnuncioService,

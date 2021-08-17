@@ -31,3 +31,8 @@
 h1{
   color: #732C7B;
 }
+
+.cancelBtn{
+  background-color: #6144ff;
+  color: #fff;
+}

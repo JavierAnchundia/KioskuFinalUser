@@ -8,22 +8,26 @@
             <div class="tab-pane active">
               <img [src]="this.currentDisplayPic" /></div>
             <div *ngFor="let img of this.imagesList" class="tab-pane" [id]="'pic-' + img.id">
-              <img [src]="'http://127.0.0.1:8000/static' + img.imagen" /></div>
+              <img [src]="mediaPath + img.imagen" /></div>
 
           </div>
           <ul class="preview-thumbnail nav nav-tabs">
             <li (click)="changeCurrentDisplayPic(img.imagen)" *ngFor="let img of this.imagesList"><a [attr.data-bs-target]="'pic-' + img.id" data-toggle="tab">
-              <img [src]="'http://127.0.0.1:8000/static' + img.imagen" /></a></li>
+              <img [src]="mediaPath + img.imagen" /></a></li>
           </ul>
 
         </div>
         <div class="details col-md-6">
           <h3 class="product-title">{{ this.currentProduct?.titulo }}</h3>
           <div class="available">
-              <span class="availability" *ngIf="this.currentProduct.disponible">Disponible</span>
+              <span class="availability" *ngIf="this.currentProduct?.disponible">Disponible</span>
           </div>
+          <div class="available">
+            <span class="quantity">{{ this.currentProduct?.item.cantidad }} unidades</span>
 
-          <h4 class="price"><span>{{ this.currentProduct?.item.creditos }}</span> C</h4>
+        </div>
+
+          <h4 class="price"><span>{{ this.currentProduct?.precio }}</span> C</h4>
           <div class="action mb-4">
             <button class="add-to-cart btn btn-default" type="button" (click)="addToCart(this.currentProduct)">
               Agregar al carro <span class="fas fa-cart-plus"></span>

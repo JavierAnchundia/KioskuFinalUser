@@ -1,3 +1,18 @@
 h2{
   color: #732c7b;
 }
+
+.text-title {
+  color: #6144FF;
+}
+
+.bg-title{
+  background-color: #6144FF;
+}
+
+.btn{
+  border-radius: 0;
+  background-color: #f8dc7b;
+  color: #000;
+  margin-bottom: 10px;
+}

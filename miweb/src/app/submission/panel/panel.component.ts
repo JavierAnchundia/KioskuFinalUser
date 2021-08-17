@@ -6,6 +6,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditItemComponent } from '../edit-item/edit-item.component'
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { CreditsModalComponent } from '../credits-modal/credits-modal.component';
+import AUTH_SERVICIOS from 'src/app/config/urls';
 
 enum Action {
   YES = "aceptar",
@@ -29,6 +30,9 @@ export class PanelComponent implements OnInit {
   public pageSize: string = '3';
   public totalLength = 0;
   public actionOptions = Action;
+  public mediaPath = AUTH_SERVICIOS.mediaURL;
+
+
   constructor(
     private item: ItemService,
     private usuario: UsuarioService,
@@ -48,7 +52,6 @@ export class PanelComponent implements OnInit {
     this.itemsList = [];
     this.item.retrieveItemsByUser(this.userID, this.pageNumber, this.pageSize)
       .then(items => {
-        console.log(items)
         this.totalLength = items[1];
         items[0].forEach((element: any) => {
           this.itemsList.push({
@@ -57,7 +60,7 @@ export class PanelComponent implements OnInit {
             descripcion: element?.descripcion,
             estado: element?.estado,
             creditos: element?.creditos,
-            thumbnail: 'http://127.0.0.1:8000/static' + element?.thumbnail,
+            thumbnail: this.mediaPath + element?.thumbnail,
           });
         });
       })

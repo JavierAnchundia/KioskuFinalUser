@@ -4,9 +4,10 @@
 </div>
 <div class="mb-3">
   <label for="formGroupExampleInput" class="form-label">Ingrese el número de créditos a comprar</label>
-  <input type="number" class="form-control" id="formGroupExampleInput">
+  <input type="number" class="form-control" id="formGroupExampleInput" [(ngModel)]="numeroCreditos">
+  <p>Total a pagar: {{ numeroCreditos * tarifaCreditos | number: '1.2'}}</p>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-cancel" (click)="closeDialog()">Cancelar</button>
-  <button type="button" class="btn btn-pay" routerLink="/inicio/checkout/facturacion">Proceder al pago</button>
+  <button type="button" class="btn btn-pay" (click)="redirectPurchaseOrder()">Proceder al pago</button>
 </div>

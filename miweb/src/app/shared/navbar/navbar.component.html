@@ -15,12 +15,26 @@
       </div>
       <div class="offcanvas-body">
         <ul class="nav navbar-nav">
-          <li class="nav-item" [routerLink]="item.router" *ngFor="let item of this.menuItems">
+          <li class="nav-item" [routerLink]="item.router" *ngFor="let item of this.menuItems" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample">
             <a class="nav-link">
               {{ item.label }}
             </a>
           </li>
-          <li class="nav-item" *ngIf="authenticated" routerLink="checkout/lista">
+          <li class="nav-item" (click)="openLoginModal()" *ngIf="!authenticated" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample">
+            <a class="nav-link">
+              Regístrate o Inicia sesión
+            </a>
+          </li>
+          <li class="nav-item" routerLink="postular/nuevo" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample">
+            <a class="nav-link">
+              Postular ítem
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="authenticated" routerLink="checkout/lista" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasExample">
             <a class="nav-link">
               <nz-badge
                 [nzCount]="this.carro.getLocalCartProducts().length ? this.carro.getLocalCartProducts().length : 0"
@@ -30,7 +44,7 @@
               </nz-badge>
             </a>
           </li>
-          <li class="nav-item" *ngIf="authenticated">
+          <li class="nav-item" *ngIf="authenticated" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample">
             <a class="nav-link">
               <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton"
                 data-bs-toggle="dropdown">
