@@ -21,11 +21,11 @@ export class CreateComponent implements OnInit {
   public itemForm!: FormGroup;
   public submissionOptions = [
     {
-      label: 'En domicilio', hint: 'El artículo se recoge en el domicilio y es evaluado posteriormente en las oficinas',
-      value: 'En domicilio'
+      label: 'Recoger en domicilio - Evaluar en domicilio', hint: 'El artículo se recoge en el domicilio y es evaluado en el mismo lugar',
+      value: 'Recoger en domicilio - Evaluar en domicilio'
     },
-    { label: 'Oficina de la empresa', value: 'Oficina de la empresa' },
-    { label: 'Recoger y evaluar en domicilio', value: 'Recoger y evaluar en domicilio' }
+    { label: 'Entregar en oficina-Evaluar en oficina', value: 'Entregar en oficina-Evaluar en oficina' },
+    { label: 'Recoger en domicilio-Evaluar en oficina', value: 'Recoger en domicilio-Evaluar en oficina' }
   ]
 
   fileList: NzUploadFile[] = [];

@@ -105,6 +105,7 @@ export class SignupComponent implements OnInit {
       usuarioF.append('cedula', form.cedula);
       usuarioF.append('celular', form.celular);
       usuarioF.append('saldo', '0');
+      usuarioF.append('membresia', '1');
       return usuarioF;
     }
 

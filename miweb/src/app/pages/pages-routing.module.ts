@@ -7,7 +7,7 @@ import { SubmissionComponent } from '../submission/submission.component';
 import { MembershipComponent } from '../membership/membership.component';
 import { UserComponent } from '../user/user.component';
 import { HomeComponent } from './home/home.component';
-import { LoggedUserGuard } from '../guards/authenticated-user.guard';
+import { AuthenticatedUserGuard } from '../guards/authenticated-user.guard';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
   {
     path: 'checkout',
     component: CartComponent,
-    canActivate: [LoggedUserGuard],
+    canActivate: [AuthenticatedUserGuard],
     loadChildren: () => import('../cart/cart.module').then(m => m.CartModule)
   },
   {
@@ -39,7 +39,7 @@ const routes: Routes = [
   {
     path: 'usuario',
     component: UserComponent,
-    canActivate: [LoggedUserGuard],
+    canActivate: [AuthenticatedUserGuard],
     loadChildren: () => import('../user/user.module').then(m => m.UserModule)
   },
   {

@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
-export class LoggedUserGuard implements CanActivate {
+export class AuthenticatedUserGuard implements CanActivate {
   constructor(
     private router: Router) { }
 

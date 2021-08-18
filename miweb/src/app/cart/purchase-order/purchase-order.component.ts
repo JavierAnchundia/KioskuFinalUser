@@ -175,7 +175,12 @@ export class PurchaseOrderComponent implements OnInit {
 
   createItemPurchaseOrder(): void{
     const estado = new FormData();
-    estado.append('estado', 'Por entregar');
+    if (this.orderType === 'item'){
+      estado.append('estado', 'Por entregar');
+    } else if (this.orderType === 'creditos'){
+      estado.append('estado', 'Entregado');
+    }
+
     this.cart.createPurchaseState(estado)
     .then((resp: any) => {
       this.createPurchaceInvoice(resp.id);
@@ -210,11 +215,12 @@ export class PurchaseOrderComponent implements OnInit {
   }
 
   updateCredits(value?: any): void {
+
     const updatedSaldo = new FormData();
-    if (!value){
+    if (this.orderType === 'item'){
       updatedSaldo.append('saldo', (this.user.saldo - this.getGlobalTotal()).toFixed(2));
     } else {
-      updatedSaldo.append('saldo', (this.user.saldo + this.getGlobalTotal()).toFixed(2));
+      updatedSaldo.append('saldo', String((Number(this.user.saldo) + Number(this.carro['totalProduct'])).toFixed(2)));
     }
 
     this.usuario.updateUser(this.usuario.getCurrentUserId(), updatedSaldo)
