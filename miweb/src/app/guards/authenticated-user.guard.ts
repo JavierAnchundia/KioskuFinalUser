@@ -13,15 +13,14 @@ export class AuthenticatedUserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      const hasAccess = (localStorage.getItem('type') === 'final');
       const isValidToken = localStorage.getItem('token') != null && localStorage.getItem('token') !== '';
 
-      if (isValidToken && hasAccess){
+      if (isValidToken){
         return true;
       } else {
         Swal.fire('Acceso denegado', 'Inicie sesión para acceder a está página.', 'error');
 
-        this.router.navigateByUrl('/');
+        
         return false;
       }
   }
