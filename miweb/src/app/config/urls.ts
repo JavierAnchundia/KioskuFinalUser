@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+const URL_ROOT = 'http://192.168.100.222:8080/api/';
+=======
 //const URL_ROOT = 'http://192.168.0.4:8080/api/';
 const URL_ROOT = 'http://127.0.0.1:8000/api/';
+>>>>>>> e3eef4a9763716159046bde603245d7b6af1261c
 
 const AUTH_SERVICIOS = {
   mediaURL: 'http://127.0.0.1:8000/static',
