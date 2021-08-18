@@ -15,7 +15,7 @@
                   [nzFilterFn]="column.filterFn!">
                   {{ column.name }}
                 </th>
-                <th class="action text-center">Acciones</th>
+                <th class="action text-center">Detalle</th>
               </tr>
             </thead>
             <tbody>
@@ -51,7 +51,7 @@
                 </td>
                 <td>
                   <ul class="list-unstyled mb-0 d-flex justify-content-center">
-                    <li><a class="text-primary"><i class="fas fa-file-invoice"></i></a></li>
+                    <li><a (click)="openOrderDetails(orden)" class="text-primary"><i class="fas fa-file-invoice"></i></a></li>
                   </ul>
                 </td>
               </tr>

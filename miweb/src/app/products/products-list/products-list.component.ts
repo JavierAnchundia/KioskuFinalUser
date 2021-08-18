@@ -5,6 +5,8 @@ import { CarroComprasService } from 'src/app/services/carro-compras/carro-compra
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 import { SubcategoriaService } from 'src/app/services/subcategoria/subcategoria.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import Swal from 'sweetalert2';
 import { Producto } from '../../models/producto';
 
 @Component({
@@ -38,6 +40,7 @@ export class ProductsListComponent implements OnInit {
     private carro: CarroComprasService,
     public route: ActivatedRoute,
     public router: Router,
+    private usuario: UsuarioService,
   ) { }
 
   ngOnInit(): void {
@@ -232,7 +235,11 @@ export class ProductsListComponent implements OnInit {
   }
 
   addToCart(product: Producto) {
-    this.carro.addToCart(product);
+    if (this.usuario.getUserStatus()){
+      this.carro.addToCart(product);
+    } else {
+      Swal.fire('Inicia sesión para agregar productos.')
+    }
   }
 
 }

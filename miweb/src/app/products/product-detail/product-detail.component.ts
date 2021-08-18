@@ -5,6 +5,8 @@ import { Producto } from 'src/app/models/producto';
 import { CarroComprasService } from 'src/app/services/carro-compras/carro-compras.service';
 import { ImagenProductoService } from 'src/app/services/imagen-producto/imagen-producto.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
+import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-product-detail',
@@ -25,6 +27,7 @@ export class ProductDetailComponent implements OnInit {
     public route: ActivatedRoute,
     public router: Router,
     private carro: CarroComprasService,
+    private usuario: UsuarioService,
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +65,10 @@ export class ProductDetailComponent implements OnInit {
 
   addToCart(product: Producto) {
     product.thumbnail = this.currentDisplayPic;
-    this.carro.addToCart(product);
+    if (this.usuario.getUserStatus()){
+      this.carro.addToCart(product);
+    } else {
+      Swal.fire('Inicia sesión para agregar productos.')
+    }
   }
 }

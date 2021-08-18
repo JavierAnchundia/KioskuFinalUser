@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-between">
+  <h3 class="text-center" mat-dialog-title>Detalle de orden Nº {{ this.currentOrder?.id}}</h3>
+  <button type="button" class="btn-close" (click)="closeDialog()"></button>
+</div>
+<nz-table #smallTable nzSize="small" [nzData]="orderDetail" nzFrontPagination="false">
+  <thead>
+    <tr>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of smallTable.data">
+      <td>{{ data.nombre }}</td>
+      <td>{{ data.cantidad }}</td>
+      <td>{{ data.precio }}</td>
+      <td>{{ data.precio * data.cantidad }} </td>
+    </tr>
+  </tbody>
+</nz-table>
+<div class="d-flex justify-content-end">
+  <p>Subtotal: {{ this.subtotal }}</p>
+</div>
+<div class="d-flex justify-content-end">
+  <p>Total: {{this.currentOrder.total}} </p>
+</div>
+

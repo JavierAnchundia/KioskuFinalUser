@@ -16,4 +16,10 @@ export class OrdenesService {
 
     return this.http.get(url).toPromise();
   }
+
+  retrieveOrderDetail(id: string): Promise<any> {
+    const url = AUTH_SERVICIOS.orderDetail + id + '/';
+
+    return this.http.get<any>(url).toPromise();
+  }
 }

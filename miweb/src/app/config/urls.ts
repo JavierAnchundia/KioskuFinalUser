@@ -34,6 +34,7 @@ const AUTH_SERVICIOS = {
   update_credits: URL_ROOT + 'update-credits/',
   recentProductsByCat: URL_ROOT + 'recentItemsCat/',
   historial: URL_ROOT + 'historial-compra/',
+  orderDetail: URL_ROOT + 'orderDetail/',
 };
 
 

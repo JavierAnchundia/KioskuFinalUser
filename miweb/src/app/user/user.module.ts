@@ -11,13 +11,15 @@ import { NzMessageModule } from 'ng-zorro-antd/message';
 import { PurchaseHistoryComponent } from './purchase-history/purchase-history.component';
 import { PurchaseCreditsComponent } from './purchase-credits/purchase-credits.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { OrderDetailComponent } from './purchase-history/order-detail/order-detail.component';
 
 
 @NgModule({
   declarations: [
     ProfileComponent,
     PurchaseHistoryComponent,
-    PurchaseCreditsComponent
+    PurchaseCreditsComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,

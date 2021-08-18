@@ -3,6 +3,8 @@ import { OrdenesService } from 'src/app/services/ordenes/ordenes.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { NzTableFilterFn, NzTableFilterList, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
 import { OrdenCompra } from 'src/app/models/ordenCompra';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
 
 interface ColumnItem {
   name: string;
@@ -53,6 +55,7 @@ export class PurchaseHistoryComponent implements OnInit {
   constructor(
     private orden: OrdenesService,
     private usuario: UsuarioService,
+    public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -73,6 +76,22 @@ export class PurchaseHistoryComponent implements OnInit {
     .catch((error: any) => {
       console.log(error);
     })
+  }
+
+  openOrderDetails(orden: any): void{
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.position = {
+      'top': '5px',
+    };
+    dialogConfig.width = '400px';
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      orden
+    };
+    const dialogRef = this.dialog.open(OrderDetailComponent, dialogConfig);
+
+
+   
   }
 
 }
