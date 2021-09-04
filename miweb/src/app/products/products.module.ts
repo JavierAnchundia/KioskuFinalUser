@@ -13,6 +13,8 @@ import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzPaginationModule } from 'ng-zorro-antd/pagination';
 import { NzAlertModule } from 'ng-zorro-antd/alert';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 
 @NgModule({
@@ -31,7 +33,9 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
     NzTagModule,
     NzIconModule,
     NzPaginationModule,
-    NzAlertModule
+    NzAlertModule,
+    NzButtonModule,
+    NzDividerModule
   ]
 })
 export class ProductsModule { }

@@ -95,7 +95,9 @@
             </nz-badge>
           </li>
           <li class="nav-item m-2" *ngIf="authenticated" nz-dropdown [nzDropdownMenu]="menu">
-            <nz-avatar nzText="C" style="color:#000000; background-color:#f1dd95;"></nz-avatar>
+            
+            <nz-avatar nzIcon="user"></nz-avatar>
+
             <i nz-icon nzType="down"></i>
           </li>
           <nz-dropdown-menu #menu="nzDropdownMenu" nzPlacement="bottomCenter">

@@ -18,18 +18,24 @@
             </div>
             <span class="text-muted">{{ getTotalPriceItem(item?.precio, item?.addedQty)}}</span>
           </li>
+          <li class="list-group-item d-flex justify-content-between" *ngIf="this.orderType === 'item'">
+            <span>Costo de entrega</span>
+            <strong> {{ this.carro['costoEntrega'] | number:'1.2-2' }}</strong>
+          </li>
 
           <li class="list-group-item d-flex justify-content-between">
+
             <span>Total a pagar</span>
-            <strong>{{ this.getGlobalTotal() | number:'1.2-2' }}</strong>
+            <strong><span *ngIf="this.orderType != 'item'">$</span> {{ this.getGlobalTotal() | number:'1.2-2' }}</strong>
           </li>
         </ul>
 
 
         <ul class="list-group mb-3" *ngIf="this.orderType !== 'item'">
+
           <li class="list-group-item d-flex justify-content-between">
             <span>Total a pagar</span>
-            <strong>{{ this.getGlobalTotal() | number:'1.2-2' }}</strong>
+            <strong><span *ngIf="this.orderType != 'item'">$</span>{{ this.getGlobalTotal() | number:'1.2-2' }}</strong>
           </li>
         </ul>
 
@@ -86,54 +92,7 @@
             </div>
           </div>
 
-          <!-- <div *ngIf="this.orderType !== 'item'">
-            <hr class="my-3">
 
-            <h4 class="mb-3">Información de pago</h4>
-
-            <div class="my-3">
-
-              <div class="form-check">
-                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input">
-                <label class="form-check-label" for="paypal">PayPal</label>
-              </div>
-            </div>
-
-            <div class="row gy-3">
-              <div class="col-md-6">
-                <label for="cc-name" class="form-label">Name on card</label>
-                <input type="text" class="form-control" id="cc-name">
-                <small class="text-muted">Full name as displayed on card</small>
-                <div class="invalid-feedback">
-                  Name on card is
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <label for="cc-number" class="form-label">Credit card number</label>
-                <input type="text" class="form-control" id="cc-number">
-                <div class="invalid-feedback">
-                  Credit card number is
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <label for="cc-expiration" class="form-label">Expiration</label>
-                <input type="text" class="form-control" id="cc-expiration">
-                <div class="invalid-feedback">
-                  Expiration date
-                </div>
-              </div>
-
-              <div class="col-md-3">
-                <label for="cc-cvv" class="form-label">CVV</label>
-                <input type="text" class="form-control" id="cc-cvv">
-                <div class="invalid-feedback">
-                  Security code
-                </div>
-              </div>
-            </div>
-          </div> -->
           <hr class="my-4">
           <div>
 

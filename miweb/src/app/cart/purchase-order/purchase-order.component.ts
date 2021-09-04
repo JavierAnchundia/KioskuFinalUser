@@ -18,6 +18,7 @@ export class PurchaseOrderComponent implements OnInit {
   public user: any;
   public productsList: Producto[] = [];
   private discountCurr: number = 0;
+  public deliveryValue: number = 0;
   public orderType = '';
   public cartId = '';
   public loadingId = '';
@@ -44,13 +45,13 @@ export class PurchaseOrderComponent implements OnInit {
     this.getCurrentUser();
     if (this.orderType === 'item'){
       this.loadCartItems();
+      this.getCarro();
     } else if(this.orderType === 'creditos'){
       this.getCarro();
     }
   }
 
   renderPaypalBtn() : void{
-    console.log('render btn')
     window.paypal.Buttons(
       {
         style:{
@@ -58,7 +59,6 @@ export class PurchaseOrderComponent implements OnInit {
           shape: 'rect',
         },
         createOrder: (data: any, actions: { order: { create: (arg0: { purchase_units: { amount: { value: string; currency_code: string; }; }[]; }) => any; }; }) => {
-          console.log('click')
           return actions.order.create({
             purchase_units: [
               {
@@ -80,21 +80,7 @@ export class PurchaseOrderComponent implements OnInit {
           onError: (err: any) => {
           console.log(err)
           }
-        /* onApprove: function(data: any, actions: { order: { capture: () => Promise<{ purchase_units: { payments: { captures: any[]; }; }[]; }>; }; }) {
-          this.createItemPurchaseOrder();
-          return actions.order.capture().then((orderData: { purchase_units: { payments: { captures: any[]; }; }[]; }) => {
-              // Successful capture! For demo purposes:
-              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
-              var transaction = orderData.purchase_units[0].payments.captures[0];
-              alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
-              //this.createItemPurchaseOrder();
-              // Replace the above to show a success message within this page, e.g.
-              // const element = document.getElementById('paypal-button-container');
-              // element.innerHTML = '';
-              // element.innerHTML = '<h3>Thank you for your payment!</h3>';
-              // Or go to another URL:  actions.redirect('thank_you.html');
-          });
-      } */
+
       }).render(this.paypalRef.nativeElement);
   }
 
@@ -102,7 +88,9 @@ export class PurchaseOrderComponent implements OnInit {
     this.cart.retrieveCarroById(this.cartId)
     .then((cartResponse: any) => {
       this.carro = cartResponse;
-      this.renderPaypalBtn();
+      if (this.orderType !== 'item'){
+        this.renderPaypalBtn();
+      }
       this.loaded = true;
     })
   }
@@ -155,9 +143,11 @@ export class PurchaseOrderComponent implements OnInit {
     const subtotal = this.getSubtotal();
     let discount = 0;
     if (this.orderType === 'item'){
+      this.deliveryValue = this.carro['costoEntrega'];
+      console.log(this.deliveryValue);
       discount = this.getDiscountAmount(subtotal);
     }
-    return subtotal - discount;
+    return subtotal + Number(this.deliveryValue) - discount;
   }
 
   getDiscountAmount(subtotal: number): number{

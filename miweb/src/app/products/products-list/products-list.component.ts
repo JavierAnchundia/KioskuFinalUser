@@ -25,6 +25,7 @@ export class ProductsListComponent implements OnInit {
   public params: any;
   public currentCat: any = {nombre: 'Más recientes', id:''};
   public currentSubCat: any = '';
+  public currentSubCatName: any = null;
   public selectedTags: string[] = [];
   public nameValue?: string;
   public filteredName: string[] = [];
@@ -45,12 +46,6 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
-
-    if (this.route.snapshot.queryParams.cat) { // * En caso de que el url tenga parametros
-      this.getRouteParams();
-    } else {
-      this.loadMostRecent();
-    }
   }
 
   loadCategories(): void{
@@ -58,7 +53,11 @@ export class ProductsListComponent implements OnInit {
     .then(categ => {
       this.categoriesList = categ;
       this.filteredOptions = this.categoriesList;
-
+      if (this.route.snapshot.queryParams.cat) { // * En caso de que el url tenga parametros
+        this.getRouteParams();
+      } else {
+        this.loadMostRecent();
+      }
     })
     .catch((error: any) => console.log(error))
 
@@ -105,7 +104,7 @@ export class ProductsListComponent implements OnInit {
   onChangeCategory(value: any): void {
     this.filteredOptions = this.categoriesList.filter((option: any) =>
     option.nombre.toLowerCase().includes(value.toString().toLowerCase()) !== false);
-    if (value[0] !== undefined){
+    if (value[0] !== undefined && value[0] != ""){
       this.currentCat = value[0];
       this.productsList= [];
       this.loading = true;
@@ -131,10 +130,11 @@ export class ProductsListComponent implements OnInit {
 
   loadProductsByCategory(id: string): void{
     this.options = [];
-
+    this.filteredProducts = [];
+    this.productsList = [];
     this.producto.retrieveProductsByCat(id)
     .then(prod => {
-      console.log(prod);
+      //console.log(prod);
       prod[0].forEach((element: any) => {
         this.productsList.push({
           id: element.id,
@@ -164,7 +164,7 @@ export class ProductsListComponent implements OnInit {
     this.productsList= [];
     this.producto.retrieveProductsBySubcat(id)
     .then(prod => {
-      console.log(prod);
+      //console.log(prod);
       prod[0].forEach((element: any) => {
         this.productsList.push({
           id: element.id,
@@ -195,10 +195,9 @@ export class ProductsListComponent implements OnInit {
 
     this.currentCat = this.params.cat;
     this.currentSubCat = this.params.subcat;
-    if (this.currentCat && this.currentSubCat){
-
-    } else {
-      this.loadProductsByCategory(this.currentCat);
+    if (this.currentCat){
+      this.currentCat = this.categoriesList.filter((c: any) => c.id == this.params.cat)[0];
+      this.loadProductsByCategory(this.currentCat.id);
     }
   }
 
@@ -218,7 +217,13 @@ export class ProductsListComponent implements OnInit {
     } else {
       this.selectedTags = this.selectedTags.filter(t => t !== tag);
     }
-    this.loadProductsBySubCategory(tag.id);
+    if (this.selectedTags.length === 0){
+      this.loadProductsByCategory(this.currentCat.id);
+      this.currentSubCatName = null;
+    } else {
+      this.currentSubCatName = tag.nombre;
+      this.loadProductsBySubCategory(tag.id);
+    }
   }
 
 

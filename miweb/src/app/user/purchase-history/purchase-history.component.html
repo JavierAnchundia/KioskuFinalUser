@@ -29,7 +29,11 @@
                       <div class="candidate-list-option">
                         <ul class="list-unstyled">
                           <li><i class="fas fa-coins pr-1"></i> {{ orden?.total }} </li>
-                          <li><i class="fas fa-shopping-bag"></i> {{ orden?.totalCompra }} productos</li>
+                          <li><i class="fas fa-shopping-bag"></i> {{ orden?.totalCompra }}
+                            <span *ngIf="orden?.detalle === 'item'">productos</span>
+                            <span *ngIf="orden?.detalle === 'creditos'">créditos</span>
+
+                          </li>
                           <li><i class="fas fa-money-check-alt"></i> {{ orden?.pago }}</li>
 
                         </ul>
@@ -50,7 +54,7 @@
                   <span class="candidate-list-time order-1"> {{ orden?.estadoCompra }}</span>
                 </td>
                 <td>
-                  <ul class="list-unstyled mb-0 d-flex justify-content-center">
+                  <ul class="list-unstyled mb-0 d-flex justify-content-center" *ngIf="orden?.detalle === 'item'">
                     <li><a (click)="openOrderDetails(orden)" class="text-primary"><i class="fas fa-file-invoice"></i></a></li>
                   </ul>
                 </td>

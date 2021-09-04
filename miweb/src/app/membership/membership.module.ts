@@ -5,11 +5,13 @@ import { MembershipRoutingModule } from './membership-routing.module';
 import { MembershipListComponent } from './membership-list/membership-list.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { NzModalModule } from 'ng-zorro-antd/modal';
+import { PaymentComponent } from './payment/payment.component';
 
 
 @NgModule({
   declarations: [
-    MembershipListComponent
+    MembershipListComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,

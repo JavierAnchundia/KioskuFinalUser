@@ -7,4 +7,5 @@ export class OrdenCompra {
   totalCompra?: number;
   estadoCompra!: string;
   pago?: string;
+  detalle?: string;
 }

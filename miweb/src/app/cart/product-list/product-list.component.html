@@ -45,10 +45,6 @@
         <div class="col text-right">{{ this.getSubtotal() | number:'1.2-2' }} C</div>
       </div>
       <div class="row">
-        <div class="col" style="padding-left:0;">Tarifa de envío</div>
-        <div class="col text-right">0.00 C</div>
-      </div>
-      <div class="row">
         <div class="col text-left" style="padding-left:0;">Descuento</div>
         <div class="col text-right">{{ this.getDiscountAmount(this.getSubtotal()) | number:'1.2-2'}} C</div>
       </div>

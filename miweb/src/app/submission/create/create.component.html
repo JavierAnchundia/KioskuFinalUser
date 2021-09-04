@@ -8,15 +8,15 @@
     <mat-card-content>
       <form [formGroup]="itemForm!" (ngSubmit)="submit()">
         <mat-form-field class="item-form-field" appearance="outline">
-          <mat-label>Nombre</mat-label>
+          <mat-label>Nombre del ítem</mat-label>
           <input matInput type="text" formControlName="nombre">
-          <button *ngIf="itemForm.value.nombre" matSuffix mat-icon-button aria-label="Clear"
+          <button *ngIf="itemForm.value.nombre" matSuffix class="btn" aria-label="Clear"
             (click)="itemForm.patchValue({nombre: null})">
-            <mat-icon>close</mat-icon>
+            <i class="fas fa-times"></i>
           </button>
         </mat-form-field>
         <mat-form-field class="item-form-field" appearance="outline">
-          <mat-label>Descripción</mat-label>
+          <mat-label>Descripción del ítem</mat-label>
           <textarea matInput formControlName="descripcion" row=4 spellcheck="true" maxlength="250"></textarea>
           <div class="count-div">
             <div class="count-text">{{itemForm.value.descripcion.length}}/250</div>
@@ -49,9 +49,10 @@
               Subir imágenes
             </button>
           </nz-upload>
+          <small *ngIf="fileList.length === 0" class="text-danger"><i class="fas fa-exclamation-circle"></i> Para poder enviar su postulación es necesario subir al menos una imagen.</small>
         </div>
         <div>
-          <button [disabled]="fileList.length === 0" type="submit" class="btn btn-lg btn-submit">Crear ítem</button>
+          <button [disabled]="fileList.length === 0" type="submit" class="btn btn-lg btn-submit">Enviar postulación</button>
         </div>
       </form>
     </mat-card-content>

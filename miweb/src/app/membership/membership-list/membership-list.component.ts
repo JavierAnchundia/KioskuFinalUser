@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NzMessageService } from 'ng-zorro-antd/message';
@@ -5,11 +6,13 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { LoginComponent } from 'src/app/authentication/login/login.component';
 import { MembershipService } from 'src/app/services/membership/membership.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
+import { PaymentComponent } from '../payment/payment.component';
 
 @Component({
   selector: 'app-membership-list',
   templateUrl: './membership-list.component.html',
-  styleUrls: ['./membership-list.component.css']
+  styleUrls: ['./membership-list.component.css'],
+  providers: [DatePipe]
 })
 export class MembershipListComponent implements OnInit {
   public authenticated = false;
@@ -23,6 +26,7 @@ export class MembershipListComponent implements OnInit {
     private message: NzMessageService,
     private modal: NzModalService,
     public dialog: MatDialog,
+    public datepipe: DatePipe,
 
   ) {
     this.authenticated = this.usuario.getUserStatus();
@@ -55,7 +59,8 @@ export class MembershipListComponent implements OnInit {
         nzContent: 'Su membresía se actualizará a ' + membresia.tipo + '.',
         nzOnOk: () =>
          {
-          this.updateSuscription(membresia.id);
+           this.openPaymentModal(membresia);
+          //this.updateSuscription(membresia.id);
          }
       });
     } else {
@@ -83,11 +88,11 @@ export class MembershipListComponent implements OnInit {
   cancelPlan(): void{
     const loadingMsg = this.message.loading('Procesando solicitud...').messageId;
 
-    const membership = {membresia: '1'};
+    const membership = {membresia: '1', fechaSuscripcion: null};
     this.usuario.updateUser(this.usuario.getCurrentUserId(), membership)
     .then(resp => {
       this.message.remove(loadingMsg);
-      this.message.create('success', 'La membresía se ha adquirido con éxito.');
+      this.message.create('success', 'La membresía se ha cancelado.');
       setTimeout(() => {
         this.ngOnInit();
       }, 1000)
@@ -95,6 +100,7 @@ export class MembershipListComponent implements OnInit {
     })
     .catch(err => {
       console.error(err);
+      this.message.remove(loadingMsg);
       this.message.create('error', 'Ocurrió un error en la solicitud. Intente nuevamente.');
     })
   }
@@ -102,7 +108,7 @@ export class MembershipListComponent implements OnInit {
   updateSuscription(id: string): void{
     const loadingMsg = this.message.loading('Procesando solicitud...').messageId;
 
-    const membership = {membresia: id};
+    const membership = {membresia: id, fechaSuscripcion: this.datepipe.transform(new Date(), 'yyyy-MM-dd')};
     this.usuario.updateUser(this.usuario.getCurrentUserId(), membership)
     .then(resp => {
       this.message.remove(loadingMsg);
@@ -114,6 +120,7 @@ export class MembershipListComponent implements OnInit {
     })
     .catch(err => {
       console.error(err);
+      this.message.remove(loadingMsg);
       this.message.create('error', 'Ocurrió un error en la solicitud. Intente nuevamente.');
     })
   }
@@ -131,6 +138,19 @@ export class MembershipListComponent implements OnInit {
         this.usuario.setUserStatus(true);
         location.reload();
       }
+    });
+  }
+
+  openPaymentModal(membresia: any): void {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.position = {
+      'top': '10vh',
+    };
+    dialogConfig.data = {membresia};
+    dialogConfig.disableClose = true;
+    const dialogRef = this.dialog.open(PaymentComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+        location.reload();
     });
   }
 }

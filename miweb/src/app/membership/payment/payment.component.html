@@ -1,0 +1,17 @@
+<div class="d-flex justify-content-between">
+  <h5 class="text-center" mat-dialog-title>Confirmar pago de membresía</h5>
+  <button type="button" class="btn-close" (click)="closeDialog()"></button>
+</div>
+<div>
+  <p *ngIf="this.msg">{{ this.msg }}</p>
+  <p>El costo total de la suscripción por la membresía {{ this.currMembresia?.tipo}} es de
+    $ {{ this.currMembresia?.tarifa }} .
+  </p>
+</div>
+<div #paypalRef>
+</div>
+
+<div *ngIf="this.msg">
+  <p>O si deseeas cancelar tu suscripción</p>
+  <button (click)="cancelPlan()">Cancelar suscripción.</button>
+</div>

@@ -20,11 +20,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-<<<<<<< HEAD
-            "outputPath": "../Kiosku/www",
-=======
             "outputPath": "../../KioskuProject/www",
->>>>>>> e3eef4a9763716159046bde603245d7b6af1261c
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
