@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { LoginComponent } from 'src/app/authentication/login/login.component';
+import { Demo } from 'src/app/demo';
 import { MembershipService } from 'src/app/services/membership/membership.service';
 import { UsuarioService } from 'src/app/services/usuario/usuario.service';
 import { PaymentComponent } from '../payment/payment.component';
@@ -40,9 +41,10 @@ export class MembershipListComponent implements OnInit {
   }
 
   loadMemberships(): void{
-    this.membresia.retrieveMemberships()
+    /* this.membresia.retrieveMemberships()
     .then(data => this.membershipList = data)
-    .catch(err => console.error(err))
+    .catch(err => console.error(err)) */
+    this.membershipList = Demo.getMembresias();
   }
 
   getCurrentUserMem(): void{

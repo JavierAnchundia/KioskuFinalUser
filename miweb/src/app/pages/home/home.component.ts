@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import AUTH_SERVICIOS from 'src/app/config/urls';
+import { Demo } from 'src/app/demo';
 import { AnuncioService } from 'src/app/services/anuncio/anuncio.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
 
@@ -27,19 +28,21 @@ export class HomeComponent implements OnInit {
   }
 
   loadAnuncios(): void {
-    this.anuncio.retrieveAdvertisements()
+    /* this.anuncio.retrieveAdvertisements()
     .then((data: any) => {
       this.anuncioList = data.reverse();
     })
-    .catch((err: any) =>console.log(err))
+    .catch((err: any) =>console.log(err)) */
+    this.anuncioList = Demo.getAnuncios();
   }
 
   loadMostRecent(): void{
-    this.producto.retrieveRecentProductByCat()
+    this.recent = Demo.getProductosHome();
+   /*  this.producto.retrieveRecentProductByCat()
     .then((data: any) => {
       this.recent = data;
     })
-    .catch((err: any) =>console.log(err))
+    .catch((err: any) =>console.log(err)) */
   }
 
   goToCategory(id: string): void{

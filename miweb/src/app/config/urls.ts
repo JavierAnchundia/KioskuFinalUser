@@ -1,6 +1,6 @@
 //const URL_ROOT = 'http://192.168.0.4:8080/api/';
-const URL_ROOT = 'http://127.0.0.1:8000/api/';
-
+//const URL_ROOT = 'http://127.0.0.1:8000/api/';
+const URL_ROOT = '';  
 const AUTH_SERVICIOS = {
   mediaURL: 'http://127.0.0.1:8000/static',
   login: URL_ROOT + 'token/',

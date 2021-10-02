@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import AUTH_SERVICIOS from 'src/app/config/urls';
+import { Demo } from 'src/app/demo';
 import { Producto } from 'src/app/models/producto';
 import { CarroComprasService } from 'src/app/services/carro-compras/carro-compras.service';
 import { ImagenProductoService } from 'src/app/services/imagen-producto/imagen-producto.service';
@@ -45,18 +46,23 @@ export class ProductDetailComponent implements OnInit {
   }
 
   loadProductInfo(): void {
-    this.producto.retrieveProductById(this.params.producto)
+    const productos = Demo.getProductos();
+    console.log(productos);
+    this.currentProduct = productos.filter(elem => elem.id == this.params.producto)[0];
+    console.log(this.currentProduct);
+    /* this.producto.retrieveProductById(this.params.producto)
       .then(product => this.currentProduct = product)
-      .catch(error => console.log(error))
+      .catch(error => console.log(error)) */
   }
 
   loadProductImages(): void {
-    this.imgProducto.retrieveImagesByProduct(this.params.producto)
+    this.currentDisplayPic = this.currentProduct.thumbnail;
+    /* this.imgProducto.retrieveImagesByProduct(this.params.producto)
       .then(img => {
         this.imagesList = img;
         this.currentDisplayPic = this.mediaPath + img[0]['imagen'];
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(error)) */
   }
 
   changeCurrentDisplayPic(path: string): void {

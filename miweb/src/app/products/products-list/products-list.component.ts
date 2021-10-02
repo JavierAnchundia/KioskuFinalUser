@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import AUTH_SERVICIOS from 'src/app/config/urls';
+import { Demo } from 'src/app/demo';
 import { CarroComprasService } from 'src/app/services/carro-compras/carro-compras.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 import { ProductoService } from 'src/app/services/producto/producto.service';
@@ -49,6 +50,14 @@ export class ProductsListComponent implements OnInit {
   }
 
   loadCategories(): void{
+    this.categoriesList = Demo.getCategorias();
+    this.filteredOptions = this.categoriesList;
+      if (this.route.snapshot.queryParams.cat) { // * En caso de que el url tenga parametros
+        this.getRouteParams();
+      } else {
+        this.loadMostRecent();
+      }
+      /*
     this.categorias.retrieveCategories()
     .then(categ => {
       this.categoriesList = categ;
@@ -60,19 +69,31 @@ export class ProductsListComponent implements OnInit {
       }
     })
     .catch((error: any) => console.log(error))
-
+*/
   }
 
   loadSubcategories(id: string): void{
-    this.subcategoria.retrieveSubcategoriesByCat(id)
+    this.subCatList = Demo.getSubCategorias().filter(element => element.categoria == id);
+   /*  this.subcategoria.retrieveSubcategoriesByCat(id)
     .then(subcat => this.subCatList = subcat)
-    .catch((error: any) => console.log(error))
+    .catch((error: any) => console.log(error)) */
   }
 
   loadMostRecent(): void{
     this.loading = true;
     this.options = [];
-    this.producto.retrieveMostRecent()
+    this.productsList = Demo.getProductos();
+    Demo.getProductos().forEach((element: any) => {
+      this.options.push(
+        element.titulo
+      )
+    })
+    this.filteredProducts = this.productsList;
+    this.filteredName = this.options;
+
+    this.loading = false;
+
+   /*  this.producto.retrieveMostRecent()
     .then(prod => {
       prod[0].forEach((element: any) => {
         this.productsList.push({
@@ -98,7 +119,7 @@ export class ProductsListComponent implements OnInit {
     .catch((error: any) => {
       console.log(error);
       this.loading = false;
-    })
+    }) */
   }
 
   onChangeCategory(value: any): void {
@@ -106,7 +127,7 @@ export class ProductsListComponent implements OnInit {
     option.nombre.toLowerCase().includes(value.toString().toLowerCase()) !== false);
     if (value[0] !== undefined && value[0] != ""){
       this.currentCat = value[0];
-      this.productsList= [];
+      //this.productsList= [];
       this.loading = true;
       this.router.navigate(['.'], {
         relativeTo: this.route, queryParams: {
@@ -116,7 +137,6 @@ export class ProductsListComponent implements OnInit {
       this.loadSubcategories(this.currentCat.id);
       this.loadProductsByCategory(this.currentCat.id);
     } else {
-      this.productsList= [];
       this.subCatList = [];
       this.currentCat = {nombre: 'Más recientes', id:''};
       this.router.navigate(['.'], {
@@ -129,40 +149,23 @@ export class ProductsListComponent implements OnInit {
   }
 
   loadProductsByCategory(id: string): void{
-    this.options = [];
-    this.filteredProducts = [];
-    this.productsList = [];
-    this.producto.retrieveProductsByCat(id)
-    .then(prod => {
-      //console.log(prod);
-      prod[0].forEach((element: any) => {
-        this.productsList.push({
-          id: element.id,
-          titulo: element.titulo,
-          descripcion: element?.descripcion,
-          precio: element?.precio,
-          disponible: element?.disponible,
-          cantidad: element?.item.cantidad,
-          creditos: element?.item.creditos,
-          thumbnail: this.mediaPath + element?.thumbnail,
-        });
-        this.options.push(
-          element.titulo
-        )
-      })
-      this.filteredProducts = this.productsList;
-      this.filteredName = this.options;
+    this.productsList = Demo.getProductos();
+    this.productsList = this.productsList.filter((option: any) => option.categoria == id);
+    this.filteredProducts = this.productsList;
+    this.filteredName = this.options;
 
-      this.loading = false;
-    })
-    .catch((error: any) => console.log(error))
+    this.loading = false;
+
   }
 
   loadProductsBySubCategory(id: string): void{
-    this.options = [];
+    this.productsList = Demo.getProductos();
+    this.productsList = this.productsList.filter((option: any) => option.subcategoria == id);
+    this.filteredProducts = this.productsList;
+    this.filteredName = this.options;
 
-    this.productsList= [];
-    this.producto.retrieveProductsBySubcat(id)
+    this.loading = false;
+   /*  this.producto.retrieveProductsBySubcat(id)
     .then(prod => {
       //console.log(prod);
       prod[0].forEach((element: any) => {
@@ -185,7 +188,7 @@ export class ProductsListComponent implements OnInit {
 
       this.loading = false;
     })
-    .catch((error: any) => console.log(error))
+    .catch((error: any) => console.log(error))*/
   }
 
   getRouteParams(): void {
@@ -218,7 +221,7 @@ export class ProductsListComponent implements OnInit {
       this.selectedTags = this.selectedTags.filter(t => t !== tag);
     }
     if (this.selectedTags.length === 0){
-      this.loadProductsByCategory(this.currentCat.id);
+      this.loadMostRecent();
       this.currentSubCatName = null;
     } else {
       this.currentSubCatName = tag.nombre;
