@@ -7,6 +7,7 @@ import { EditItemComponent } from '../edit-item/edit-item.component'
 import { NzModalRef, NzModalService } from 'ng-zorro-antd/modal';
 import { CreditsModalComponent } from '../credits-modal/credits-modal.component';
 import AUTH_SERVICIOS from 'src/app/config/urls';
+import { Demo } from 'src/app/demo';
 
 enum Action {
   YES = "aceptar",
@@ -27,7 +28,7 @@ export class PanelComponent implements OnInit {
   public itemsList: any[] = [];
   private confirmModal?: NzModalRef;
   public pageNumber: string = '1';
-  public pageSize: string = '3';
+  public pageSize: string = '6';
   public totalLength = 0;
   public actionOptions = Action;
   public mediaPath = AUTH_SERVICIOS.mediaURL;
@@ -50,7 +51,19 @@ export class PanelComponent implements OnInit {
 
   loadItems(): void {
     this.itemsList = [];
-    this.item.retrieveItemsByUser(this.userID, this.pageNumber, this.pageSize)
+    const items = Demo.getSubmittedItems();
+    this.totalLength = items[1];
+    items[0].forEach((element: any) => {
+      this.itemsList.push({
+        id: element.id,
+        titulo: element.titulo,
+        descripcion: element?.descripcion,
+        estado: element?.estado,
+        creditos: element?.creditos,
+        thumbnail: element?.thumbnail,
+      });
+    });
+   /*  this.item.retrieveItemsByUser(this.userID, this.pageNumber, this.pageSize)
       .then(items => {
         this.totalLength = items[1];
         items[0].forEach((element: any) => {
@@ -63,7 +76,7 @@ export class PanelComponent implements OnInit {
             thumbnail: this.mediaPath + element?.thumbnail,
           });
         });
-      })
+      }) */
   }
 
 
