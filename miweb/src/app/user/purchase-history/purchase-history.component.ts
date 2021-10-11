@@ -69,13 +69,32 @@ export class PurchaseHistoryComponent implements OnInit {
   }
 
   loadHistory(): void{
-    this.orden.retrieveHistorial(this.userId)
-    .then((hist: any) => {
-      this.listData = hist;
-    })
-    .catch((error: any) => {
-      console.log(error);
-    })
+    /*this.orden.retrieveHistorial(this.userId)
+    .then((hist: any) => {*/
+
+      this.listData = [
+        {id:1,
+        dateCreated:new Date("2021-07-11"),
+        costoEntrega: 5,
+        total: 50,
+        estadoCompra: 'Entregado',
+        detalle: 'item',
+        totalCompra: 2,
+        pago: 'Creditos'},
+
+        {id:2,
+          dateCreated:new Date("2021-11-07"),
+          costoEntrega: 5,
+          total: 50,
+          estadoCompra: 'Entregado',
+          detalle: 'item',
+          totalCompra: 5,
+          pago: 'Creditos'}
+      ];
+    //})
+    //.catch((error: any) => {
+     // console.log(error);
+    //})
   }
 
   openOrderDetails(orden: any): void{

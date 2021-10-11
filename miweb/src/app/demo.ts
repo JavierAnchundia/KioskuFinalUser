@@ -122,7 +122,7 @@ export class Demo {
               "cantidad": 1,
               "entrega": "Entregar en oficina-Evaluar en oficina",
               "creditos": 0,
-              "thumbnail": "/media/items/img_comedor1.jpeg",
+              "thumbnail": "./assets/demo/comedor1.jpeg",
               "propietario": 1
           },
           "categoria": {
@@ -136,7 +136,7 @@ export class Demo {
           "material": "Madera",
           "disponible": true,
           "titulo": "Juego de comedor",
-          "thumbnail": "/media/producto/comedor1.jpeg",
+          "thumbnail": "https://marcimex.vteximg.com.br/arquivos/ids/159156-700-700/14510_mesa-comedor-valenciano-6p_foto1.jpg?v=636831706750600000",
           "cantidad": 5,
           "is_active": true,
           "estado": 3,
@@ -157,7 +157,7 @@ export class Demo {
               "cantidad": 1,
               "entrega": "Recoger en domicilio - Evaluar en domicilio",
               "creditos": 310,
-              "thumbnail": "/media/items/img_messifcb_lelh1U2.jpeg",
+              "thumbnail": "./assets/demo/img_messi.jpeg",
               "propietario": 1
           },
           "categoria": {
@@ -171,7 +171,7 @@ export class Demo {
           "material": "Dri-FIT ADV",
           "disponible": false,
           "titulo": "Camiseta Messi FCB 2020/2021",
-          "thumbnail": "/media/producto/img_messi.jpeg",
+          "thumbnail": "https://m.media-amazon.com/images/I/710Nsla3TKL._AC_UL1500_.jpg",
           "cantidad": 0,
           "is_active": true,
           "estado": 13,

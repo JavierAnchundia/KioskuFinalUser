@@ -72,21 +72,25 @@ export class CreateComponent implements OnInit {
         //this.openSnackBar('Complete todos los campos para poder continuar.', 'Cerrar');
         this.message.create('error', 'Complete todos los campos para poder continuar.');
 
-      } else {
+      } 
+    
+      else 
+      {
         //Swal.showLoading();
         const id = this.message.loading('Procesando solicitud...').messageId;
-
+        this.message.remove(id);
+        this.message.create('success', 'El ítem se ha creado con éxito.');
+        
         this.addEstado()
           .catch(error => console.log(error))
           .then(resp => {
-            this.addItem(resp.id, this.itemForm.value)
-              .catch(error => console.log(error))
-              .then(item => {
-                this.addImageItem(item.id)
-                  .then(img => {
+            this.addItem(resp.id, this.itemForm.value);
+              //.catch(error => console.log(error))
+              //.then(item => {
+                //this.addImageItem(item.id)
+                  //.then(img => {
                     //Swal.close();
-                    this.message.remove(id);
-                    this.message.create('success', 'El ítem se ha creado con éxito.');
+                    
 
                     //this.openSnackBar('El ítem se ha creado con éxito.', 'Cerrar');
                     this.itemForm.patchValue({
@@ -98,22 +102,22 @@ export class CreateComponent implements OnInit {
                       this.itemForm.controls[control].setErrors(null);
                     }
                     this.fileList = [];
-                  }
-                  )
-                  .catch(error => {
+                  //}
+                  //)
+                  /*.catch(error => {
                     console.log(error);
                     this.message.create('error', 'No se pudo crear el ítem. Intente nuevamente.');
 
-                  })
+                  })*/
 
 
-              });
+              //});
           });
       }
     }
   }
 
-  addItem(idEstado: string, form: any): Promise<any> {
+  addItem(idEstado: string, form: any): void {
     const item = new FormData();
 
     item.append('titulo', form.nombre);
@@ -123,7 +127,7 @@ export class CreateComponent implements OnInit {
     item.append('entrega', form.entrega);
     item.append('estado', idEstado);
 
-    return this.item.createItem(item);
+    //return this.item.createItem(item);
   }
 
 

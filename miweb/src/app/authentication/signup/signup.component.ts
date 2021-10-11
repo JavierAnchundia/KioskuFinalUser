@@ -72,13 +72,13 @@ export class SignupComponent implements OnInit {
           Swal.fire('El usuario se ha agregado con éxito.');
 
           this.usuario.loginUser(this.user)
-          .subscribe(async resp => {
+          /*.subscribe(async resp => {
             this.userID = JSON.parse(localStorage.getItem('user') || '{}').user_id;
             this.loadUserInfo();
           }, error => {
             console.log(error);
             Swal.fire('Correo o contraseña incorrectos.', 'Intente nuevamente');
-          });
+          });*/
         },
         (error: any) => {
           if (error.error.email) {

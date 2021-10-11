@@ -30,11 +30,11 @@ export class ProductListComponent implements OnInit {
   }
 
   loadUserInfo(): void{
-    this.usuario.getUserInfo(this.usuario.getCurrentUserId())
-    .then(user => {
-      this.discountCurr = user.membresia.pct_dscto;
-      this.creditsCurr = user.saldo;
-    })
+    //this.usuario.getUserInfo(this.usuario.getCurrentUserId())
+    //.then(user => {
+      this.discountCurr = 10;
+      this.creditsCurr = 5000;
+    //})
   }
 
   loadCartItems(): void{

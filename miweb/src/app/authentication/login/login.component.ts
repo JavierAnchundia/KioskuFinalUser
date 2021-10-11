@@ -50,26 +50,32 @@ export class LoginComponent implements OnInit {
       this.user.password = form.password;
 
       this.usuario.loginUser(this.user)
-        .subscribe(async resp => {
+
+      this.userID = JSON.parse(localStorage.getItem('user') || '{}').user_id;
+      this.loadUserInfo();
+        /*.subscribe(async resp => {
           this.userID = JSON.parse(localStorage.getItem('user') || '{}').user_id;
           this.loadUserInfo();
         }, error => {
           console.log(error);
           Swal.fire('Correo o contraseña incorrectos.', 'Intente nuevamente');
-        });
+        });*/
     }
   }
 
   loadUserInfo(): void {
 
-    this.usuario.getUserInfo(this.userID).then(
-      (data: any) => {
-        this.user = data;
-        localStorage.setItem('type', data.rol);
+    this.usuario.getUserInfo(this.userID)//.then(
+      //(data: any) => {
+        this.user.fechaSuscripcion = '2021-10-3';
+        this.user.membresia = true;
+        this.user.rol = 'final';
+
+        localStorage.setItem('type', 'final');
         Swal.close();
         this.checkMembership();
         this.dialogRef.close({ event: 'UserLogged' });
-      });
+      //});
   }
 
   closeDialog(): void {

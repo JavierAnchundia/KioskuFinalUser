@@ -29,20 +29,23 @@ export class UsuarioService {
    }
 
   // Metodo para autenticar al usuario
-  public loginUser(user: any): Observable<boolean> {
+  public loginUser(user: any): boolean {
     const url = AUTH_SERVICIOS.login;
-    return this.http.post(url, JSON.stringify(user), this.httpOptions).pipe(
-      map((resp: any) => {
+    /*return this.http.post(url, JSON.stringify(user), this.httpOptions).pipe(
+      map((resp: any) => {*/
         this.isLoggedIn = true;
-        this.token = JSON.stringify(resp.access);
-        this.refresh = JSON.stringify(resp.refresh).slice(1, -1);
-        this.updateData(resp.access);
+        this.token = JSON.stringify("Token de Acceso");
+        this.refresh = JSON.stringify("Valor del Refresh")//.slice(1, -1);
+        //this.updateData(resp.access);
         localStorage.setItem('token', this.token);
         localStorage.setItem('refresh', this.refresh);
-        localStorage.setItem('user', JSON.stringify(this.tokenGestion(resp.access)));
+        //localStorage.setItem('user', JSON.stringify(this.tokenGestion(resp.access)));
+        localStorage.setItem('user', JSON.stringify(user.email));
+
         return true;
-      })
-    );
+        //return true;
+      //})
+    //);
   }
 
   // Se carga datos en el local storage

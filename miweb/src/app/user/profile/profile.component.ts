@@ -53,17 +53,32 @@ export class ProfileComponent implements OnInit {
 
   loadCurrentUserInfo(): void{
     this.usuario.getUserInfo(this.currUserId)
-    .then((userData: any) => {
-      this.currentUserInfo = userData;
-    })
-    .catch(err => console.log(err));
+    //.then((userData: any) => {
+      this.currentUserInfo = 
+      {
+        name: 'Giselle Farol',
+        saldo: 4000,
+        membresia: {tipo:1},
+        email: "gisellefarol@correo.com",
+        provincia: {nombre: "Guayas"},
+        ciudad: {nombre: "Guayaquil"},
+        address: "Direccion Ciudad",
+        celular: '0939239293293',
+        cedula: '09122931293'
+
+
+
+
+      };
+    //})
+    //.catch(err => console.log(err));
 
   }
 
   loadProvinces(): void{
-    this.location.retrieveProvinces()
-    .then(data => this.provinces = data)
-    .catch(err => console.log(err))
+    //this.location.retrieveProvinces()
+    //.then(data => this.provinces = data)
+    //.catch(err => console.log(err))
   }
 
   loadCities(event?: any): void{

@@ -31,15 +31,26 @@ export class OrderDetailComponent implements OnInit {
   }
 
   loadOrderDetail(): void{
-    this.orden.retrieveOrderDetail(this.currentOrder.carro)
-    .then((orden: any) => {
-      console.log(orden);
-      this.orderDetail = orden;
-      this.subtotal = orden[0]['subtotal'];
-    })
-    .catch((error: any) => {
-      console.log(error);
-    })
+    //this.orden.retrieveOrderDetail(this.currentOrder.carro)
+    //.then((orden: any) => {
+      //console.log(orden);
+      this.orderDetail = [
+      {
+        nombre: "Producto 1",
+        cantidad: 2,
+        precio: 8
+      },
+      {
+        nombre: "Producto 2",
+        cantidad: 3,
+        precio: 8
+      }];
+
+      this.subtotal = 40;
+    //})
+    //.catch((error: any) => {
+      //console.log(error);
+    //})
   }
 
 }

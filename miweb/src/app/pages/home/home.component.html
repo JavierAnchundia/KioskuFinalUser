@@ -57,7 +57,7 @@
           <title>Placeholder</title>
           <rect width="100%" height="100%" fill="#777" /><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text>
         </svg>
-        <img class="rounded-circle" [src]="mediaPath + producto.thumbnail" width="140" height="140" preserveAspectRatio="xMidYMid slice">
+        <img class="rounded-circle" [src]="producto.thumbnail" width="140" height="140" preserveAspectRatio="xMidYMid slice">
         <h2>{{ producto.categoria.nombre }}</h2>
         <p>Revisa el artículo más reciente de esta categoría:
           <a (click)="openProductDetail(producto.id)" class="product-title">{{ producto.titulo }}</a></p>
